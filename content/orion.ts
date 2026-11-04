@@ -11,7 +11,7 @@ const img = (name: string, width: number, height: number, alt: Localized) => ({
 export const orion = {
   slug: "orion-rituals",
   logo: { src: "/side/orion-rituals.webp", width: 1400, height: 563 },
-  photo: img("lucy-y-ale", 1200, 1500, { es: "Lucy y Alejandro, fundadores de Orion Rituals", en: "Lucy and Alejandro, founders of Orion Rituals" }),
+  photo: img("lucy-y-ale-recorte", 1100, 1502, { es: "Lucy y Alejandro, fundadores de Orion Rituals", en: "Lucy and Alejandro, founders of Orion Rituals" }),
   kicker: { es: "Festivales y conciertos · Cádiz · Desde 2026", en: "Festivals and concerts · Cádiz · Since 2026" },
   intro: {
     es: "La marca de festivales que hemos creado Lucy y yo: rituales de música alternativa para que la escena gaditana tenga dónde brillar.",
@@ -37,11 +37,11 @@ export const orion = {
   founders: [
     {
       name: "Lucy",
-      role: { es: "Cofundadora", en: "Co-founder" },
+      role: { es: "Co-Presidenta", en: "Co-President" },
     },
     {
       name: "Ale",
-      role: { es: "Cofundador · diseño gráfico", en: "Co-founder · graphic design" },
+      role: { es: "Co-Presidente", en: "Co-President" },
     },
   ],
   facts: [

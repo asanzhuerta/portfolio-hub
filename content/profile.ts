@@ -118,7 +118,7 @@ export const profile: Profile = {
       },
     },
     {
-      title: { es: "Cofundador de Orion Rituals", en: "Co-founder of Orion Rituals" },
+      title: { es: "Co-Presidente de Orion Rituals", en: "Co-President of Orion Rituals" },
       place: { es: "Festivales y conciertos en Cádiz, con Lucy", en: "Festivals and concerts in Cádiz, with Lucy" },
       period: { es: "2026 – actualidad", en: "2026 – present" },
       detail: {

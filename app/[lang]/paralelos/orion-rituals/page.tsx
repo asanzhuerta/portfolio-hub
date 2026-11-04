@@ -85,7 +85,7 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
             </span>
           </div>
         </div>
-        {/* Lucy and me, dissolving into the ink like the portrait on the home page. */}
+        {/* Lucy and me, cut out (rembg) and fading out at the bottom into the ink. */}
         <div
           data-reveal
           style={stagger(2)}
@@ -98,7 +98,7 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
             height={orion.photo.height}
             priority
             sizes="(min-width: 768px) 40vw, 100vw"
-            className="ml-auto h-full max-h-[80svh] w-auto object-cover [mask-image:radial-gradient(ellipse_62%_62%_at_50%_45%,black_40%,transparent_78%)]"
+            className="ml-auto h-full max-h-[80svh] w-auto object-contain drop-shadow-[0_0_40px_rgb(155_132_240/0.25)] [mask-image:linear-gradient(to_bottom,black_72%,transparent_98%)]"
           />
         </div>
       </section>
