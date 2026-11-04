@@ -1,40 +1,68 @@
 @import "tailwindcss";
 
+/* Dark only: the ink background is the identity of the site. */
 :root {
-  --background: #fafafa;
-  --surface: #ffffff;
-  --foreground: #18181b;
-  --muted: #52525b;
-  --border: #e4e4e7;
-  --accent: #0d9488;
-  --accent-foreground: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b0b0d;
-    --surface: #141417;
-    --foreground: #ececef;
-    --muted: #a1a1aa;
-    --border: #27272a;
-    --accent: #2dd4bf;
-    --accent-foreground: #042f2e;
-  }
+  color-scheme: dark;
+  --background: #050608;
+  --foreground: #ece9e3;
+  --muted: #9a9ca3;
+  --faint: #5f6169;
+  --line: rgb(236 233 227 / 0.12);
+  --accent: #4d74ff;
+  --accent-strong: #2a50e0;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
-  --color-border: var(--border);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
   --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-strong: var(--accent-strong);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-instrument-serif);
+}
+
+html {
+  /* Shown until (or instead of) the WebGL ink. The body stays transparent so the
+     fixed canvas behind it shows through. */
+  background: radial-gradient(ellipse at 70% 20%, #0c1430 0%, transparent 55%) fixed, var(--background);
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
+}
+
+::selection {
+  background: var(--accent-strong);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Sections rise in as they enter the viewport, where scroll-driven animations exist. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }

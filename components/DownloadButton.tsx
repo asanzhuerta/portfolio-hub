@@ -4,40 +4,30 @@ const dateFormat = new Intl.DateTimeFormat("es-ES", { dateStyle: "long" });
 
 export async function DownloadButton({ repo }: { repo: string }) {
   const release = await getLatestRelease(repo);
-  const repoUrl = `https://github.com/${repo}`;
 
   if (!release) {
     return (
-      <div className="flex flex-col gap-2">
-        <span className="inline-flex w-fit cursor-not-allowed items-center rounded-lg border border-border px-5 py-3 font-medium text-muted">
-          Próximamente
-        </span>
-        <p className="text-sm text-muted">
-          Aún no hay ninguna versión publicada. Sigue el progreso en{" "}
-          <a href={repoUrl} className="underline hover:text-foreground">
-            GitHub
-          </a>
-          .
-        </p>
-      </div>
+      <span className="inline-flex min-h-12 w-fit items-center rounded-full border border-line px-7 py-3 font-mono text-xs uppercase tracking-widest text-faint">
+        Próximamente
+      </span>
     );
   }
 
   const href = release.installer?.url ?? release.pageUrl;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <a
         href={href}
-        className="inline-flex w-fit items-center gap-2 rounded-lg bg-accent px-5 py-3 font-medium text-accent-foreground transition-opacity hover:opacity-90"
+        className="inline-flex min-h-12 w-fit items-center gap-4 rounded-full bg-foreground px-7 py-3 font-mono text-xs uppercase tracking-widest text-background transition-colors hover:bg-accent hover:text-white"
       >
         Descargar para Windows
-        <span className="font-mono text-sm opacity-80">v{release.version}</span>
+        <span className="opacity-60">v{release.version}</span>
       </a>
-      <p className="font-mono text-xs text-muted">
-        {release.installer && `${release.installer.name} · ${formatSize(release.installer.size)} · `}
+      <p className="font-mono text-xs text-faint">
+        {release.installer && `${formatSize(release.installer.size)} · `}
         {dateFormat.format(new Date(release.publishedAt))} ·{" "}
-        <a href={release.pageUrl} className="underline hover:text-foreground">
+        <a href={release.pageUrl} className="underline underline-offset-4 hover:text-foreground">
           notas de la versión
         </a>
       </p>
