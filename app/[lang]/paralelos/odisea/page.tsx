@@ -42,7 +42,7 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
       className="flex flex-col gap-28 pb-28 sm:gap-36"
       style={{ "--accent": "#e5484d", "--accent-strong": "#b4232c" } as React.CSSProperties}
     >
-      <section className="relative grid items-center gap-8 py-10 sm:py-16 md:min-h-[calc(100svh-4rem)] md:content-center md:grid-rows-[auto_auto] md:grid-cols-[1fr_1fr] md:gap-10">
+      <section className="relative grid items-center gap-8 py-10 sm:py-16 md:min-h-[calc(100svh-4rem)] md:content-center md:grid-rows-[auto_auto] md:grid-cols-[0.8fr_1.2fr] md:gap-10">
         {/* First thing on every screen size; above the photo on phones. */}
         <Link
           data-reveal
@@ -85,7 +85,7 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
         <div
           data-reveal
           style={stagger(2)}
-          className="pointer-events-none order-first -mx-4 sm:mx-0 md:order-none md:col-start-2 md:row-span-2 md:row-start-1 md:self-center"
+          className="pointer-events-none order-first -mx-4 sm:mx-0 md:order-none md:-mr-8 xl:-mr-24 md:col-start-2 md:row-span-2 md:row-start-1 md:self-center"
         >
           {/* The soft edges are baked into the cut-out's transparency (scripts/
               fade-cutout.mjs), so no CSS mask clips the glow around the band. */}
