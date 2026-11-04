@@ -147,13 +147,18 @@ export function InkBackground() {
     canvas.dataset.ready = "true";
 
     let frame = 0;
-    const loop = () => {
-      // Ease towards the scroll position so the ink lags behind like a fluid, and
-      // let the stirring decay slowly once the reader stops.
-      const step = (scrollTarget() - scroll) * 0.08;
+    let last = performance.now();
+    const loop = (now: number) => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      // Ease towards the scroll position so the ink lags behind like a fluid (time
+      // based, so wheel steps blend into one motion at any frame rate), and let the
+      // stirring rise and decay gently instead of jumping with each step.
+      const step = (scrollTarget() - scroll) * (1 - Math.exp(-dt * 3.5));
       scroll += step;
-      stir = Math.min(1, stir * 0.95 + Math.abs(step) * 6);
-      draw((performance.now() - start) / 1000);
+      const speed = Math.min(1, Math.abs(step / Math.max(dt, 1e-3)) * 0.6);
+      stir += (speed - stir) * (1 - Math.exp(-dt * (speed > stir ? 4 : 1.2)));
+      draw((now - start) / 1000);
       frame = requestAnimationFrame(loop);
     };
 

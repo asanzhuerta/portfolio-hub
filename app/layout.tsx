@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import Link from "next/link";
 import { InkBackground } from "@/components/InkBackground";
 import { RevealObserver } from "@/components/RevealObserver";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { profile } from "@/content/profile";
 import "./globals.css";
 
@@ -40,13 +41,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} ${jakarta.variable} h-full antialiased`}
     >
-      <head>
-        {/* Arms the scroll-reveal styles before first paint; without JS nothing is hidden. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-      </head>
       <body className="flex min-h-full flex-col font-sans">
         <InkBackground />
         <RevealObserver />
+        <SmoothScroll />
         <header className="sticky top-0 z-20 border-b border-line bg-background/50 backdrop-blur-md">
           <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-3 sm:px-8">
             <Link href="/" className="whitespace-nowrap font-display text-[15px] font-semibold tracking-tight">
