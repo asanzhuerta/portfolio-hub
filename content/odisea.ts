@@ -29,6 +29,25 @@ export const odisea = {
     { label: { es: "Origen", en: "From" }, value: { es: "Cádiz, España", en: "Cádiz, Spain" } },
     { label: { es: "Temática", en: "Themes" }, value: { es: "Emo · goth · personal", en: "Emo · goth · personal" } },
   ],
+  members: [
+    {
+      name: "Ale",
+      role: { es: "Guitarra, voz, producción, promoción y diseño gráfico", en: "Guitar, vocals, production, promotion and graphic design" },
+      also: "Festival Universitario Acústica",
+    },
+    {
+      name: "Lucy",
+      role: { es: "Frontwoman, voz, letras y guitarra acústica", en: "Frontwoman, vocals, lyrics and acoustic guitar" },
+      also: "Heavier Leaves",
+    },
+    { name: "Espe", role: { es: "Bajo y arte conceptual", en: "Bass and concept art" } },
+    { name: "Exandes", role: { es: "Guitarra", en: "Guitar" }, also: "Break On a Leash" },
+    { name: "Álvaro", role: { es: "Batería", en: "Drums" }, also: "Burned Waves" },
+  ] as { name: string; role: Localized; also?: string }[],
+  ending: {
+    es: "Aquí se contará cómo terminó ODISEA. En un futuro daremos más información.",
+    en: "How ODISEA came to an end will be told here. More information will follow in the future.",
+  } as Localized,
   // Instagram goes first, as asked.
   links: [
     { label: "Instagram", icon: "instagram", href: "https://www.instagram.com/odisea_band" },
@@ -40,14 +59,18 @@ export const odisea = {
   ] as const,
   spotifyArtist: "02e70YYx2pauBnKAIvCp68",
   videos: [
-    { id: "lmCesAEwdSE", title: "Ciempiés", kind: { es: "Videoclip oficial", en: "Official video" } },
+    // The first one is shown big: Penitencia, the best video the band made.
     { id: "KjrV4BF63wg", title: "Penitencia", kind: { es: "Videoclip oficial", en: "Official video" } },
+    { id: "lmCesAEwdSE", title: "Ciempiés", kind: { es: "Videoclip oficial", en: "Official video" } },
     { id: "qqwzT-Qs6t8", title: "Spielzeug", kind: { es: "Lyric video oficial", en: "Official lyric video" } },
   ],
   live: [
     { id: "diDm3eP7EAE", title: "Impío", kind: { es: "Directo · Acústica 2024", en: "Live · Acústica 2024" } },
     { id: "_zs9-Ad5SPA", title: "Demonios", kind: { es: "Directo · Acústica 2024", en: "Live · Acústica 2024" } },
+    { id: "pM6GJc2tKuA", title: "Fantasma", kind: { es: "Fragmento · Acústica 2024", en: "Excerpt · Acústica 2024" } },
+    { id: "zUejATVQ8Bs", title: "Memento Mori", kind: { es: "Fragmento · Acústica 2024", en: "Excerpt · Acústica 2024" } },
     { id: "bkTJy8jKkJc", title: "Memento Mori", kind: { es: "Resumen 2024", en: "2024 recap" } },
+    { id: "-12iebwnA7U", title: "Spielzeug", kind: { es: "Making-of", en: "Making-of" } },
   ],
   releases: [
     { title: "Corrosión", kind: { es: "EP", en: "EP" }, year: 2026 },
@@ -85,17 +108,24 @@ export const odisea = {
     { year: 2026, dates: [
       ["09/05", "Granada", "Sala Víbora"],
       ["23/05", "Jerez de la Frontera", "La Malquería"],
+      ["15/08", "Cádiz", "Hércules Rock Fest · Soho Alternative Bar"],
     ] },
   ] as { year: number; dates: [string, string, string][] }[],
-  // The two press pieces from the band's dossier. More are listed for review.
+  // Interviews and reviews first, then news and listings, newest first in each.
   press: [
     {
-      outlet: "Rock The Best Music",
-      title: "Odisea – Ecos del alma",
-      quote: { es: "Melodías con las que es sencillo conectar", en: "Melodies that are easy to connect with" },
-      kind: { es: "Reseña", en: "Review" },
-      date: "2025-02-24",
-      href: "https://rockthebestmusic.com/2025/02/odisea-ecos-del-alma.html",
+      outlet: "LaCarne Magazine",
+      title: "Odisea: la construcción de una identidad dentro del metal alternativo",
+      kind: { es: "Entrevista", en: "Interview" },
+      date: "2026-06-09",
+      href: "https://lacarnemagazine.com/odisea-identidad-metal-alternativo/",
+    },
+    {
+      outlet: "LokomotoraRock · Radio El Palmar",
+      title: "La Odisea del Alma",
+      kind: { es: "Radio · Entrevista", en: "Radio · Interview" },
+      date: "2025-04-14",
+      href: "https://www.ivoox.com/lokomotorarock-la-odisea-del-alma-conexion-radio-audios-mp3_rf_144951601_1.html",
     },
     {
       outlet: "Rock For Everyone",
@@ -105,5 +135,41 @@ export const odisea = {
       date: "2026-04-12",
       href: "https://rockforeveryone.es/resena-de-corrosion-de-odisea/",
     },
-  ],
+    {
+      outlet: "Rock For Everyone",
+      title: "Reseña de Spielzeug y Penitencia de Odisea",
+      kind: { es: "Reseña", en: "Review" },
+      date: "2026-03-23",
+      href: "https://rockforeveryone.es/resena-de-spielzeug-y-penitencia-de-odisea/",
+    },
+    {
+      outlet: "Rock The Best Music",
+      title: "Odisea – Ecos del alma",
+      quote: { es: "Melodías con las que es sencillo conectar", en: "Melodies that are easy to connect with" },
+      kind: { es: "Reseña", en: "Review" },
+      date: "2025-02-24",
+      href: "https://rockthebestmusic.com/2025/02/odisea-ecos-del-alma.html",
+    },
+    {
+      outlet: "Rock The Best Music",
+      title: "Hércules Rock Fest, este verano en Cádiz",
+      kind: { es: "Cartel", en: "Line-up" },
+      date: "2026-07-03",
+      href: "https://rockthebestmusic.com/2026/07/hercules-rock-fest-este-verano-en-cadiz.html",
+    },
+    {
+      outlet: "SevillaMetal",
+      title: "Lost In Existence, Dreem Ripper y Odisea en Sevilla",
+      kind: { es: "Noticia", en: "News" },
+      date: "2025-09-24",
+      href: "https://www.sevillametal.org/sevillametal/2406-lost-in-existence-dreem-ripper-y-odisea-en-sevilla",
+    },
+    {
+      outlet: "La Voz del Sur",
+      title: "Metal y grunge en un festival de Halloween para gritar en Cádiz",
+      kind: { es: "Noticia", en: "News" },
+      date: "2024-10-30",
+      href: "https://www.lavozdelsur.es/ediciones/cadiz/metal-grunge-en-festival-halloween-gritar-en-cadiz_323573_102.html",
+    },
+  ] as { outlet: string; title: string; quote?: Localized; kind: Localized; date: string; href: string }[],
 };

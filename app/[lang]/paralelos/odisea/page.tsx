@@ -122,8 +122,25 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
         </div>
       </section>
 
+      <section id="formacion" className="flex scroll-mt-24 flex-col gap-10">
+        <SectionHeading index="02" title={o.members} />
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {odisea.members.map((member, i) => (
+            <li key={member.name} data-reveal style={stagger(i)} className={`${panel} flex flex-col gap-3 p-5`}>
+              <span className="font-display text-2xl font-semibold tracking-tight">{member.name}</span>
+              <span className="text-sm leading-relaxed text-muted">{member.role[lang]}</span>
+              {member.also && (
+                <span className="mt-auto font-mono text-[10px] uppercase tracking-widest text-faint">
+                  {o.also} <span className="text-accent">{member.also}</span>
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section id="videos" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="02" title={o.videos} />
+        <SectionHeading index="03" title={o.videos} />
         <div className="grid gap-5 md:grid-cols-2">
           {odisea.videos.map((video, i) => (
             <figure key={video.id} data-reveal style={stagger(i % 2)} className={`flex flex-col gap-3 ${i === 0 ? "md:col-span-2" : ""}`}>
@@ -154,7 +171,7 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
       </section>
 
       <section id="musica" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="03" title={o.music} />
+        <SectionHeading index="04" title={o.music} />
         <div className="grid gap-5 md:grid-cols-[1fr_1.1fr]">
           <ul className="grid h-fit grid-cols-2 gap-3">
             {odisea.releases.map((release, i) => (
@@ -179,7 +196,7 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
       </section>
 
       <section id="trayectoria" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="04" title={o.shows} />
+        <SectionHeading index="05" title={o.shows} />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {odisea.shows.map((season, i) => (
             <div key={season.year} data-reveal style={stagger(i)} className={`${panel} flex flex-col gap-4 p-5`}>
@@ -204,7 +221,7 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
       </section>
 
       <section id="prensa" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="05" title={o.press} />
+        <SectionHeading index="06" title={o.press} />
         <ul className="grid gap-5 md:grid-cols-2">
           {odisea.press.map((item, i) => (
             <li key={item.href} data-reveal style={stagger(i)}>
@@ -223,16 +240,35 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
                     className="h-5 w-5 -rotate-45 text-faint transition-all group-hover:rotate-0 group-hover:text-accent"
                   />
                 </div>
-                <blockquote className="font-display text-2xl font-semibold leading-snug tracking-tight">
-                  “{item.quote[lang]}”
-                </blockquote>
+                {item.quote ? (
+                  <blockquote className="font-display text-2xl font-semibold leading-snug tracking-tight">
+                    “{item.quote[lang]}”
+                  </blockquote>
+                ) : (
+                  <p className="font-display text-xl font-semibold leading-snug tracking-tight">{item.title}</p>
+                )}
                 <p className="mt-auto text-sm text-muted">
-                  <span className="text-foreground">{item.outlet}</span> · {item.title}
+                  <span className="text-foreground">{item.outlet}</span>
+                  {item.quote && <> · {item.title}</>}
                 </p>
               </a>
             </li>
           ))}
         </ul>
+      </section>
+
+      <section id="final" className="flex scroll-mt-24 flex-col gap-10">
+        <SectionHeading index="07" title={o.ending} />
+        <div data-reveal className={`${panel} relative isolate overflow-hidden p-8 sm:p-12`}>
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_55%_80%_at_85%_50%,rgb(229_72_77/0.16),transparent_70%)]"
+          />
+          <p className="font-mono text-[11px] uppercase tracking-widest text-accent">2022 – 2026</p>
+          <p className="mt-4 max-w-2xl font-display text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
+            {odisea.ending[lang]}
+          </p>
+        </div>
       </section>
     </div>
   );
