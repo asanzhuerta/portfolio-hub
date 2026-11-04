@@ -29,7 +29,6 @@ export type Profile = {
   /** Education and experience, newest first. */
   education: Entry[];
   experience: Entry[];
-  languages: { name: Localized; level: Localized; detail?: Localized }[];
 };
 
 export type Entry = {
@@ -99,15 +98,11 @@ export const profile: Profile = {
       place: { es: "Universidad de Cádiz", en: "University of Cádiz" },
       period: { es: "2019 – 2026", en: "2019 – 2026" },
     },
-    {
-      title: { es: "Bachillerato Tecnológico", en: "Technology Baccalaureate" },
-      place: { es: "IES Fuerte de Cortadura", en: "IES Fuerte de Cortadura" },
-      period: { es: "2017 – 2019", en: "2017 – 2019" },
-    },
   ],
   experience: [
     {
       title: { es: "Prácticas de empresa", en: "Internship" },
+      period: { es: "2026", en: "2026" },
       place: {
         es: "Departamento de Ingeniería Informática, Campus de Jerez (UCA)",
         en: "Department of Computer Engineering, Jerez Campus (UCA)",
@@ -129,6 +124,7 @@ export const profile: Profile = {
     {
       title: { es: "Co-organizador y coordinación logística", en: "Co-organiser and logistics coordinator" },
       place: { es: "Festival Universitario Acústica, Cádiz", en: "Acústica university festival, Cádiz" },
+      period: { es: "2024 – 2025", en: "2024 – 2025" },
     },
     {
       title: { es: "Dirección de proyecto musical autogestionado", en: "Director of a self-managed music project" },
@@ -146,10 +142,6 @@ export const profile: Profile = {
         en: "IT equipment audit and network cabling reorganisation and labelling.",
       },
     },
-  ],
-  languages: [
-    { name: { es: "Español", en: "Spanish" }, level: { es: "Nativo", en: "Native" } },
-    { name: { es: "Inglés", en: "English" }, level: { es: "B2", en: "B2" }, detail: { es: "Cambridge", en: "Cambridge" } },
   ],
   // From the CV, plus what Cover_Maker and this site are built with.
   technologies: [

@@ -87,6 +87,8 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
           style={stagger(2)}
           className="pointer-events-none order-first -mx-4 sm:mx-0 md:order-none"
         >
+          {/* The soft edges are baked into the cut-out's transparency (scripts/
+              fade-cutout.mjs), so no CSS mask clips the glow around the band. */}
           <Image
             src={odisea.photo.src}
             alt={o.photoAlt}
@@ -94,7 +96,7 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
             height={odisea.photo.height}
             priority
             unoptimized
-            className="h-auto w-full drop-shadow-[0_0_36px_rgb(229_72_77/0.35)] [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]"
+            className="h-auto w-full drop-shadow-[0_0_36px_rgb(229_72_77/0.35)]"
           />
         </div>
       </section>

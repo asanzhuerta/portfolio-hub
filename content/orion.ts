@@ -11,7 +11,7 @@ const img = (name: string, width: number, height: number, alt: Localized) => ({
 export const orion = {
   slug: "orion-rituals",
   logo: { src: "/side/orion-rituals.webp", width: 1400, height: 563 },
-  photo: img("lucy-y-ale-recorte", 1100, 1502, { es: "Lucy y Alejandro, fundadores de Orion Rituals", en: "Lucy and Alejandro, founders of Orion Rituals" }),
+  photo: img("lucy-y-ale-fundido", 1100, 1502, { es: "Lucy y Alejandro, fundadores de Orion Rituals", en: "Lucy and Alejandro, founders of Orion Rituals" }),
   kicker: { es: "Festivales y conciertos · Cádiz · Desde 2026", en: "Festivals and concerts · Cádiz · Since 2026" },
   intro: {
     es: "La marca de festivales que hemos creado Lucy y yo: rituales de música alternativa para que la escena gaditana tenga dónde brillar.",
@@ -100,18 +100,16 @@ export const orion = {
       },
     },
   ],
-  // Logos pending (Ale will send them). Website, or social page when there is none.
+  // Logos in public/side/orion-rituals/partners (as supplied, trimmed and resized).
   partners: [
-    { name: "Sala Soho · Soho Alternative Bar", href: "https://www.facebook.com/Sohoalternative" },
-    { name: "Woodstock Bar" },
-    { name: "La Chupitería", href: "https://www.instagram.com/lachupiteriakdiz/" },
-    { name: "Asociación Cultural Bahía Metal Rock" },
-    { name: "Asociación de Músicos de Puerto Real · CRD Music", href: "https://musicospuertoreal.es/" },
-    { name: "Radio El Palmar 108 FM", href: "https://www.facebook.com/radioelpalmar108fm/" },
-    { name: "Live Sound · Sonido e iluminación", href: "https://livesoundaudiovisuales.es/" },
-    { name: "encumar.es", href: "https://encumar.es/" },
-    { name: "Ticket and Roll", href: "https://ticketandroll.com/" },
-  ] as { name: string; href?: string }[],
+    { name: "Sala Soho", href: "https://www.facebook.com/Sohoalternative", logo: ["soho.webp", 560, 284] },
+    { name: "Asociación Cultural Bahía Metal Rock", logo: ["bahia-metal-rock.webp", 320, 320] },
+    { name: "Asociación de Músicos de Puerto Real", href: "https://musicospuertoreal.es/", logo: ["musicos-puerto-real.webp", 320, 320] },
+    { name: "Radio El Palmar 108 FM", href: "https://www.facebook.com/radioelpalmar108fm/", logo: ["radio-el-palmar.webp", 254, 320] },
+    { name: "Live Sound", href: "https://livesoundaudiovisuales.es/", logo: ["live-sound.webp", 315, 320] },
+    { name: "encumar.es", href: "https://encumar.es/", logo: ["encumar.webp", 319, 320] },
+    { name: "Ticket and Roll", href: "https://ticketandroll.com/", logo: ["ticket-and-roll.svg", 60, 47] },
+  ] as { name: string; href?: string; logo: [string, number, number] }[],
   press: [
     {
       outlet: "Onda Cádiz",

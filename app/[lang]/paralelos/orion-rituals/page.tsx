@@ -86,7 +86,7 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
             </span>
           </div>
         </div>
-        {/* Lucy and me, cut out (rembg) and fading out at the bottom into the ink. */}
+        {/* Lucy and me, cut out (rembg); the fade at the bottom is baked into the image. */}
         <div
           data-reveal
           style={stagger(2)}
@@ -99,7 +99,7 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
             height={orion.photo.height}
             priority
             unoptimized
-            className="h-auto max-h-[46svh] w-auto drop-shadow-[0_0_40px_rgb(155_132_240/0.35)] [mask-image:linear-gradient(to_bottom,black_72%,transparent_100%)] md:max-h-[80svh]"
+            className="h-auto max-h-[46svh] w-auto drop-shadow-[0_0_40px_rgb(155_132_240/0.35)] md:max-h-[80svh]"
           />
         </div>
       </section>
@@ -225,23 +225,40 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
 
       <section id="colaboradores" className="flex scroll-mt-24 flex-col gap-10">
         <SectionHeading index="04" title={o.partners} />
-        <ul data-reveal className="flex flex-wrap gap-3">
-          {orion.partners.map((partner) => (
-            <li key={partner.name}>
-              {partner.href ? (
-                <a
-                  href={partner.href}
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm text-muted transition-colors hover:border-accent/60 hover:text-foreground"
-                >
-                  {partner.name} <Icon name="arrow" className="h-3.5 w-3.5 -rotate-45" />
-                </a>
-              ) : (
-                <span className="inline-flex rounded-full border border-line px-4 py-2 text-sm text-muted">{partner.name}</span>
-              )}
-            </li>
-          ))}
+        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          {orion.partners.map((partner, i) => {
+            const [file, width, height] = partner.logo;
+            const body = (
+              <>
+                <span className="flex h-24 w-full items-center justify-center sm:h-28">
+                  <Image
+                    src={`/side/orion-rituals/partners/${file}`}
+                    alt={partner.name}
+                    width={width}
+                    height={height}
+                    unoptimized
+                    className="h-auto max-h-full w-auto max-w-[80%] object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+                </span>
+                <span className="flex items-center gap-1.5 text-center text-xs leading-snug text-faint transition-colors group-hover:text-foreground">
+                  {partner.name}
+                  {partner.href && <Icon name="arrow" className="h-3 w-3 shrink-0 -rotate-45" />}
+                </span>
+              </>
+            );
+            const tile = `${panel} group flex h-full flex-col items-center justify-between gap-4 p-5`;
+            return (
+              <li key={partner.name} data-reveal style={stagger(i % 4)}>
+                {partner.href ? (
+                  <a href={partner.href} target="_blank" rel="noopener" className={`${tile} transition-colors hover:border-accent/60`}>
+                    {body}
+                  </a>
+                ) : (
+                  <div className={tile}>{body}</div>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </section>
 

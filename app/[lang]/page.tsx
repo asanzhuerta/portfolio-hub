@@ -206,23 +206,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      <section id="idiomas" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="05" title={t.home.languages} />
-        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {profile.languages.map((language, i) => (
-            <li key={language.name.es} data-reveal style={stagger(i)} className={`${panel} flex items-end justify-between gap-4 p-6`}>
-              <div className="flex flex-col gap-1">
-                <span className="font-mono text-[11px] uppercase tracking-widest text-faint">{language.name[lang]}</span>
-                <span className="font-display text-3xl font-semibold tracking-tight">{language.level[lang]}</span>
-              </div>
-              {language.detail && <span className="font-mono text-xs text-muted">{language.detail[lang]}</span>}
-            </li>
-          ))}
-        </ul>
-      </section>
-
       <section id="contacto" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="06" title={t.home.contact} />
+        <SectionHeading index="05" title={t.home.contact} />
         <div data-reveal className={`${panel} flex flex-col gap-8 p-6 sm:p-10`}>
           <div className="flex flex-col gap-3">
             <p className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">{t.home.talk}</p>
