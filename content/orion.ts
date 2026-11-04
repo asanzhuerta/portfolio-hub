@@ -103,7 +103,7 @@ export const orion = {
   // Logos in public/side/orion-rituals/partners (as supplied, trimmed and resized).
   partners: [
     { name: "Sala Soho", href: "https://www.facebook.com/Sohoalternative", logo: ["soho.webp", 560, 284] },
-    { name: "Asociación Cultural Bahía Metal Rock", logo: ["bahia-metal-rock.webp", 320, 320] },
+    { name: "Asociación Cultural Bahía Metal Rock", href: "https://www.instagram.com/bahiametalrock/", logo: ["bahia-metal-rock.webp", 320, 320] },
     { name: "Asociación de Músicos de Puerto Real", href: "https://musicospuertoreal.es/", logo: ["musicos-puerto-real.webp", 320, 320] },
     { name: "Radio El Palmar 108 FM", href: "https://www.facebook.com/radioelpalmar108fm/", logo: ["radio-el-palmar.webp", 254, 320] },
     { name: "Live Sound", href: "https://livesoundaudiovisuales.es/", logo: ["live-sound.webp", 315, 320] },

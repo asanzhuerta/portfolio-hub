@@ -44,16 +44,16 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
       className="flex flex-col gap-28 pb-28 sm:gap-36"
       style={{ "--accent": "#9b84f0", "--accent-strong": "#6a4fc9" } as React.CSSProperties}
     >
-      <section className="relative grid items-center gap-8 py-10 sm:py-16 md:min-h-[calc(100svh-4rem)] md:content-center md:grid-cols-[1.15fr_0.85fr] md:gap-10">
+      <section className="relative grid items-center gap-8 py-10 sm:py-16 md:min-h-[calc(100svh-4rem)] md:content-center md:grid-rows-[auto_auto] md:grid-cols-[1.15fr_0.85fr] md:gap-10">
         {/* First thing on every screen size; above the photo on phones. */}
         <Link
           data-reveal
           href={href(lang, "/paralelos")}
-          className="order-first w-fit font-mono text-xs uppercase tracking-widest text-muted transition-colors hover:text-foreground md:col-span-2 md:self-end"
+          className="order-first w-fit font-mono text-xs uppercase tracking-widest text-muted transition-colors hover:text-foreground md:col-start-1 md:row-start-1 md:self-end"
         >
           ← {t.side.title}
         </Link>
-        <div className="relative z-10 flex flex-col gap-8 -mt-20 sm:-mt-28 md:mt-0">
+        <div className="relative z-10 flex flex-col gap-8 md:col-start-1 md:row-start-2 md:self-start -mt-20 sm:-mt-28 md:mt-0">
           <h1 data-reveal style={stagger(1)}>
             <Image
               src={orion.logo.src}
@@ -90,7 +90,7 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
         <div
           data-reveal
           style={stagger(2)}
-          className="pointer-events-none order-first flex justify-center md:order-none md:justify-end"
+          className="pointer-events-none order-first flex justify-center md:order-none md:col-start-2 md:row-span-2 md:row-start-1 md:self-center md:justify-end"
         >
           <Image
             src={orion.photo.src}
