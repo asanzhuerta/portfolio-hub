@@ -123,7 +123,7 @@
     \fila{124.6}{\faEnvelope[regular]}{\enlace{mailto:\cvEmail}{\cvEmail}}
     \fila{134.2}{\faLinkedin}{\enlace{https://www.linkedin.com/in/\cvLinkedin}{\cvLinkedin}}
     \fila{143.8}{\faGithub}{\enlace{https://github.com/\cvGithub}{\cvGithub}}
-    \fila{153.4}{\aiOrcid}{\enlace{https://orcid.org/\cvOrcid}{\cvOrcid}}
+    \ifdefined\cvOrcid\fila{153.4}{\aiOrcid}{\enlace{https://orcid.org/\cvOrcid}{\cvOrcid}}\fi
     \separador{160.7}
     \titulolateral{168.6}{\cvt{idiomas}}
     \renewcommand\cvidioma[3]{%

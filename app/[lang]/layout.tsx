@@ -113,6 +113,14 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 sm:px-8">{children}</main>
         <footer className="mx-auto flex w-full max-w-6xl flex-wrap justify-between gap-4 border-t border-line px-4 py-8 font-mono text-xs text-faint sm:px-8">
           <span>© {profile.name}</span>
+          <nav aria-label={t.legal.nav} className="flex gap-5">
+            <Link href={href(lang, "/aviso-legal")} className="transition-colors hover:text-foreground">
+              {t.legal.notice}
+            </Link>
+            <Link href={href(lang, "/cookies")} className="transition-colors hover:text-foreground">
+              {t.legal.cookies}
+            </Link>
+          </nav>
           <span>asanzhuerta.netlify.app</span>
         </footer>
       </body>

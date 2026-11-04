@@ -48,3 +48,6 @@ next-env.d.ts
 
 # Material de origen de ODISEA (tiene datos de contacto)
 /dossier-OD/
+
+# Material de origen de Orion Rituals
+/dossier-OR/

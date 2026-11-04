@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Icon } from "@/components/Icon";
 import { SectionHeading } from "@/components/SectionHeading";
+import { SpotifyEmbed } from "@/components/SpotifyEmbed";
 import { YouTube } from "@/components/YouTube";
 import { buttonPrimary, buttonSecondary, panel } from "@/components/styles";
 import { odisea } from "@/content/odisea";
@@ -184,13 +185,7 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
             ))}
           </ul>
           <div data-reveal style={stagger(1)} className="overflow-hidden rounded-2xl border border-line-strong">
-            <iframe
-              src={`https://open.spotify.com/embed/artist/${odisea.spotifyArtist}?utm_source=generator&theme=0`}
-              title={o.spotify}
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              className="block h-[420px] w-full"
-            />
+            <SpotifyEmbed artist={odisea.spotifyArtist} title={o.spotify} label={o.spotifyLoad} note={t.legal.spotifyNote} />
           </div>
         </div>
       </section>

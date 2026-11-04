@@ -11,6 +11,8 @@ export type SideProject = {
   page?: string;
   /** Colour of the card's glow, as "r g b". */
   glow?: string;
+  /** Which page link text to show. */
+  cta?: "odisea" | "orion";
 };
 
 /** Each one will get its own site later; for now they are a showcase. */
@@ -29,10 +31,13 @@ export const sideProjects: SideProject[] = [
     name: { es: "Orion Rituals", en: "Orion Rituals" },
     kind: { es: "Festivales · Producción de eventos", en: "Festivals · Event production" },
     summary: {
-      es: "Organización y producción de eventos musicales: cartel, promoción, bandas y proveedores.",
-      en: "Organising and producing music events: line-ups, promotion, bands and suppliers.",
+      es: "La marca de festivales que hemos creado Lucy y yo: Hércules Rock Fest y CRIPTA Halloween Fest.",
+      en: "The festival brand Lucy and I created: Hércules Rock Fest and CRIPTA Halloween Fest.",
     },
     logo: { src: "/side/orion-rituals.webp", width: 1400, height: 563 },
+    page: "/paralelos/orion-rituals",
+    glow: "155 132 240",
+    cta: "orion",
   },
   {
     slug: "odisea",
@@ -45,5 +50,6 @@ export const sideProjects: SideProject[] = [
     logo: { src: "/side/odisea.webp", width: 1400, height: 553 },
     page: "/paralelos/odisea",
     glow: "229 72 77",
+    cta: "odisea",
   },
 ];

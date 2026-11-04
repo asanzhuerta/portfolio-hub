@@ -91,12 +91,10 @@
 \vspace*{9mm}\noindent
 \begin{tikzpicture}[remember picture,overlay,x=1mm,y=1mm]
   \begin{scope}[shift={(current page.north west)}]
-    % Dark header with a cobalt bloom, like the ink on the site.
-    \fill[fondo] (0,0) rectangle (210,-70);
-    \shade[inner color=acento!55!fondo,outer color=fondo,opacity=0.9]
-      (168,-14) ellipse (78 and 52);
-    \fill[fondo,path fading=north,opacity=0.6] (0,-44) rectangle (210,-70);
-    \draw[acentoclaro!50!fondo,line width=0.4pt] (0,-70) -- (210,-70);
+    % Header: a still of the site's ink (scripts/ink-still.mjs) that dissolves
+    % into the paper instead of ending in a hard edge.
+    \node[anchor=north west,inner sep=0] at (0,0) {\includegraphics[width=211mm,height=88mm]{tinta.png}};
+    \fill[white,path fading=north] (-1,-60) rectangle (211,-88.2);
     % Portrait in a thin cobalt ring.
     \begin{scope}
       \clip (178,-31) circle (19);
@@ -104,7 +102,8 @@
     \end{scope}
     \draw[acentoclaro,line width=0.8pt] (178,-31) circle (19);
     % Sidebar panel.
-    \fill[panel] (139,-70) rectangle (210,-297.1);
+    \fill[panel,path fading=north] (139,-76) rectangle (211,-90);
+    \fill[panel] (139,-90) rectangle (211,-297.1);
     % Footer.
     \node[anchor=base west,inner sep=0] at (14,-289) {\mono\fontsize{6.6}{8}\selectfont\color{tenue}\cvWeb};
     \node[anchor=base east,inner sep=0] at (196,-289) {\mono\fontsize{6.6}{8}\selectfont\color{tenue}\cvNombre\ \cvApellidos\ · CV};
@@ -129,9 +128,9 @@
    \cvdato{\faGlobe}{\href{https://\cvWeb}{\cvWeb}}\sep
    \par\cvdato{\faLinkedin}{\href{https://www.linkedin.com/in/\cvLinkedin}{in/\cvLinkedin}}\sep
    \cvdato{\faGithub}{\href{https://github.com/\cvGithub}{\cvGithub}}\sep
-   \cvdato{\aiOrcid}{\href{https://orcid.org/\cvOrcid}{\cvOrcid}}\par}
+   \ifdefined\cvOrcid\cvdato{\aiOrcid}{\href{https://orcid.org/\cvOrcid}{\cvOrcid}}\fi\par}
 \end{minipage}%
-\par\vspace{12mm}
+\par\vspace{22mm}
 % --- Body -----------------------------------------------------------------
 \noindent
 \begin{minipage}[t]{110mm}

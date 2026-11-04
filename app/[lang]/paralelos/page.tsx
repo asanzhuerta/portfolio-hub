@@ -108,7 +108,7 @@ export default async function SideProjectsPage({ params }: PageProps<"/[lang]/pa
       <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {sideProjects.map((project, i) => (
           <li key={project.slug} id={project.slug} data-reveal style={stagger(i)} className="scroll-mt-24">
-            <Card project={project} index={i} lang={lang} soon={t.side.soon} open={t.odisea.open} />
+            <Card project={project} index={i} lang={lang} soon={t.side.soon} open={project.cta === "orion" ? t.orion.open : t.odisea.open} />
           </li>
         ))}
       </ul>

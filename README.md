@@ -44,6 +44,9 @@ nacimiento van en `cv/privado.tex`, que no se sube a GitHub (copia
 - `cv/out/cv-{es,en}-privado.pdf`, con esos datos, para enviarla a mano;
 - `cv/out/cv-replica.pdf`.
 
+La cabecera del CV usa `cv/tinta.png`, un fotograma de la tinta de la web
+renderizado en CPU: `node scripts/ink-still.mjs cv/tinta.png 2480 1040`.
+
 ## Capturas de Cover_Maker
 
 `npm run screenshots` abre la app real (la instalada o el build local en

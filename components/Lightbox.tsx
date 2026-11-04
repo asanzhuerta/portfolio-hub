@@ -11,7 +11,23 @@ const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
  * A grid of screenshots that open full screen: the picture grows out of its
  * thumbnail (FLIP), arrows and swipes move between them, Esc or a click closes.
  */
-export function Lightbox({ images, labels }: { images: LightboxImage[]; labels: { open: string; close: string; prev: string; next: string } }) {
+export function Lightbox({
+  images,
+  labels,
+  grid = "grid gap-5 md:grid-cols-2",
+  featureFirst = true,
+  sizes = "(min-width: 768px) 50vw, 100vw",
+  captions = true,
+}: {
+  images: LightboxImage[];
+  labels: { open: string; close: string; prev: string; next: string };
+  /** Classes of the thumbnail grid. */
+  grid?: string;
+  /** The first thumbnail spans two columns. */
+  featureFirst?: boolean;
+  sizes?: string;
+  captions?: boolean;
+}) {
   const [open, setOpen] = useState<number | null>(null);
   const thumbs = useRef<(HTMLButtonElement | null)[]>([]);
   const stage = useRef<HTMLDivElement>(null);
@@ -78,13 +94,13 @@ export function Lightbox({ images, labels }: { images: LightboxImage[]; labels: 
 
   return (
     <>
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className={grid}>
         {images.map((image, i) => (
           <figure
             key={image.src}
             data-reveal
             style={{ "--i": i % 2 } as React.CSSProperties}
-            className={`flex flex-col gap-3 ${i === 0 ? "md:col-span-2" : ""}`}
+            className={`flex flex-col gap-3 ${featureFirst && i === 0 ? "md:col-span-2" : ""}`}
           >
             <button
               ref={(el) => {
@@ -101,14 +117,14 @@ export function Lightbox({ images, labels }: { images: LightboxImage[]; labels: 
                 alt={image.alt}
                 width={image.width}
                 height={image.height}
-                sizes={i === 0 ? "(min-width: 1152px) 1088px, 100vw" : "(min-width: 768px) 50vw, 100vw"}
+                sizes={featureFirst && i === 0 ? "(min-width: 1152px) 1088px, 100vw" : sizes}
                 className="h-auto w-full transition-transform duration-700 group-hover:scale-[1.015]"
               />
               <span className="pointer-events-none absolute right-3 top-3 rounded-full bg-black/60 px-2.5 py-1 font-mono text-[11px] uppercase tracking-widest text-foreground/80 opacity-0 backdrop-blur transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
                 ⤢
               </span>
             </button>
-            <figcaption className="font-mono text-xs text-faint">{image.caption}</figcaption>
+            {captions && <figcaption className="font-mono text-xs text-faint">{image.caption}</figcaption>}
           </figure>
         ))}
       </div>
