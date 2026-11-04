@@ -2,14 +2,16 @@
 
 import { useEffect, useRef } from "react";
 
-// Ink swirling in water: domain-warped fBm around a slow vortex. The page scroll
-// turns and drifts the vortex; time adds a slow drift on top. Cobalt only shows in
-// the thin, bright filaments.
+// Ink swirling in water: domain-warped fBm around a vortex. The scroll drives it:
+// scrolling down carries the ink upwards, winds the vortex and, the faster you
+// scroll, stirs the warp harder. Without scrolling it barely drifts. Cobalt only
+// shows in the thin, bright filaments.
 const FRAGMENT = `#version 300 es
 precision highp float;
 uniform vec2 uRes;
 uniform float uTime;
-uniform float uScroll;
+uniform float uScroll; // scroll position, in viewport heights
+uniform float uStir;   // smoothed scroll speed, 0..1
 out vec4 outColor;
 
 float hash(vec2 p) {
@@ -40,17 +42,18 @@ float fbm(vec2 p) {
 
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / min(uRes.x, uRes.y);
-  // The vortex centre sinks as the page scrolls, so the swirl travels with the reader.
-  vec2 centre = vec2(0.25, 0.15 - uScroll * 0.35);
-  vec2 d = uv - centre;
+  vec2 d = uv - vec2(0.2, 0.05);
   float r = length(d);
-  float angle = atan(d.y, d.x) + 1.6 / (r + 0.35) + uScroll * 2.4 + uTime * 0.02;
+  float angle = atan(d.y, d.x) + 1.6 / (r + 0.35) + uScroll * 0.9 + uTime * 0.006;
   vec2 p = vec2(cos(angle), sin(angle)) * r * 2.2;
+  // The ink field itself moves up with the page, a little slower than the content.
+  p.y -= uScroll * 1.1;
 
-  float t = uTime * 0.035;
+  float t = uTime * 0.01;
+  float stir = 3.5 + uStir * 2.0;
   vec2 q = vec2(fbm(p + t), fbm(p + vec2(5.2, 1.3) - t));
-  vec2 w = vec2(fbm(p + 3.5 * q + vec2(1.7, 9.2) + uScroll * 0.6),
-                fbm(p + 3.5 * q + vec2(8.3, 2.8)));
+  vec2 w = vec2(fbm(p + stir * q + vec2(1.7, 9.2) + uScroll * 0.5),
+                fbm(p + stir * q + vec2(8.3, 2.8)));
   float f = fbm(p + 3.0 * w);
 
   // Dense black ink over a slightly lighter, smoky water; the bright edges where the
@@ -114,6 +117,7 @@ export function InkBackground() {
     const uRes = gl.getUniformLocation(program, "uRes");
     const uTime = gl.getUniformLocation(program, "uTime");
     const uScroll = gl.getUniformLocation(program, "uScroll");
+    const uStir = gl.getUniformLocation(program, "uStir");
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Ink is soft: half resolution is invisible and four times cheaper.
@@ -125,17 +129,16 @@ export function InkBackground() {
       gl.viewport(0, 0, canvas.width, canvas.height);
     };
 
-    const scrollTarget = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      return max > 0 ? window.scrollY / max : 0;
-    };
+    const scrollTarget = () => window.scrollY / window.innerHeight;
 
     let scroll = scrollTarget();
+    let stir = 0;
     const start = performance.now();
     const draw = (time: number) => {
       gl.uniform2f(uRes, canvas.width, canvas.height);
       gl.uniform1f(uTime, time);
       gl.uniform1f(uScroll, scroll);
+      gl.uniform1f(uStir, stir);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
 
@@ -145,8 +148,11 @@ export function InkBackground() {
 
     let frame = 0;
     const loop = () => {
-      // Ease towards the scroll position so the ink lags behind like a fluid.
-      scroll += (scrollTarget() - scroll) * 0.06;
+      // Ease towards the scroll position so the ink lags behind like a fluid, and
+      // let the stirring decay slowly once the reader stops.
+      const step = (scrollTarget() - scroll) * 0.08;
+      scroll += step;
+      stir = Math.min(1, stir * 0.95 + Math.abs(step) * 6);
       draw((performance.now() - start) / 1000);
       frame = requestAnimationFrame(loop);
     };
@@ -155,12 +161,19 @@ export function InkBackground() {
       resize();
       if (reduceMotion) draw(0);
     };
+    // With reduced motion the ink still follows the page, but only on scroll events.
+    const onScroll = () => {
+      scroll = scrollTarget();
+      draw(0);
+    };
     window.addEventListener("resize", onResize);
+    if (reduceMotion) window.addEventListener("scroll", onScroll, { passive: true });
     if (!reduceMotion) frame = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", onScroll);
       gl.deleteBuffer(buffer);
       gl.deleteProgram(program);
     };

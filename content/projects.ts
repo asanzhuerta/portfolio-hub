@@ -10,6 +10,8 @@ export type Project = {
   platforms: string[];
   licence: string;
   tags: string[];
+  /** Square icon in public/, shown on the card and the project page. */
+  icon: string;
   /** Shown on the project page, below the download button. */
   notice?: string;
 };
@@ -17,6 +19,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "cover-maker",
+    icon: "/cover-maker.svg",
     name: "Cover_Maker",
     tagline: "Separación de stems con IA, en local, para músicos y productores.",
     description: [
