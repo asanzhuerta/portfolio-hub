@@ -13,3 +13,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Read from disk by the Open Graph image routes (lib/og.tsx).
+[functions]
+  included_files = ["assets/fonts/*.ttf", "public/*.svg"]

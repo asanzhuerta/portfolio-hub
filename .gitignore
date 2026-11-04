@@ -42,3 +42,6 @@ next-env.d.ts
 
 # local tooling
 .claude/
+
+# Original del CV (contiene datos privados)
+/CURRICULUM_VITAE_*.pdf

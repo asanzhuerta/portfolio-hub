@@ -1,0 +1,155 @@
+% CV con el estilo de asanzhuerta.netlify.app, en versión formal para imprimir:
+% cabecera oscura con el azul cobalto de la web, Plus Jakarta Sans para títulos,
+% Geist para el texto y Geist Mono para etiquetas y fechas.
+%   node build.mjs   (genera es/en, versión pública y privada)
+\documentclass[10pt]{article}
+\usepackage[a4paper,left=14mm,right=14mm,top=0mm,bottom=10mm]{geometry}
+\input{comun}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usetikzlibrary{fadings}
+
+\providecommand\cvlang{es}
+
+\defaultfontfeatures{Ligatures=TeX,Path=../assets/fonts/,Extension=.ttf}
+\setmainfont{Geist}[UprightFont=*-Regular,BoldFont=*-SemiBold]
+\newfontfamily\jakarta{PlusJakartaSans}[UprightFont=*-SemiBold,BoldFont=*-ExtraBold,ItalicFont=*-Italic]
+\newfontfamily\jakartamedium{PlusJakartaSans-Medium}
+\newfontfamily\mono{GeistMono}[UprightFont=*-Regular,BoldFont=*-Medium]
+
+% The site's palette, darkened where it has to work on paper.
+\definecolor{fondo}{HTML}{050608}
+\definecolor{tinta}{HTML}{15171C}
+\definecolor{suave}{HTML}{565A64}
+\definecolor{tenue}{HTML}{8A8D96}
+\definecolor{linea}{HTML}{E2E3E7}
+\definecolor{panel}{HTML}{F4F5F7}
+\definecolor{acento}{HTML}{2F52E6}
+\definecolor{acentoclaro}{HTML}{5B7CFF}
+\definecolor{claro}{HTML}{ECEAE6}
+
+\pagestyle{empty}
+\setlength\parindent{0pt}
+\hyphenpenalty=10000\exhyphenpenalty=10000
+\color{tinta}
+
+\input{contenido-\cvlang}
+
+% --- Pieces ------------------------------------------------------------------
+\newcounter{cvsec}
+\makeatletter\let\cvtwo\two@digits\makeatother
+\newcommand\cvseccion[1]{%
+  \par\vspace{3.6mm}\stepcounter{cvsec}%
+  {\mono\fontsize{7.5}{9}\selectfont\color{acento}\cvtwo{\value{cvsec}}}\hspace{2.6mm}%
+  {\jakarta\fontsize{12.5}{14}\selectfont\color{tinta}#1}\par
+  \vspace{1.2mm}{\color{linea}\rule{\linewidth}{0.5pt}}\par\vspace{1.8mm}}
+
+\newcommand\cvcentro[1]{%
+  \par\vspace{0.8mm}{\jakarta\fontsize{10}{12}\selectfont #1}\par\vspace{1mm}}
+
+\newenvironment{cvlista}
+  {\begin{itemize}[leftmargin=4mm,labelsep=2mm,itemsep=0.6mm,
+      label={\raisebox{0.32ex}{\color{acento}\tikz\fill circle (0.42mm);}}]
+   \raggedright\fontsize{8.7}{11.6}\selectfont\color{suave}}
+  {\end{itemize}}
+
+\newcommand\cvestudio[2]{%
+  {\color{tinta}#1}\par\vspace{0.3mm}{\mono\fontsize{7}{9}\selectfont\color{tenue}#2}}
+
+\newcommand\cvpuestotrabajo[3]{%
+  \cvcentro{#1}\vspace{-0.6mm}%
+  {\mono\fontsize{7.2}{10}\selectfont\color{acento}#2}\par\vspace{1mm}%
+  {\raggedright\fontsize{8.7}{11.6}\selectfont\color{suave}#3\par}\vspace{1.8mm}}
+
+\newcommand\cvdestacado[2]{{\color{tinta}\bfseries #1} #2}
+\newcommand\cvrol[2]{{\color{tinta}\bfseries #1} #2}
+
+% Sidebar.
+\newcommand\cvlateral[1]{%
+  \par\vspace{4.6mm}%
+  {\mono\fontsize{7}{9}\selectfont\color{tenue}\addfontfeatures{LetterSpace=12}\MakeUppercase{#1}}\par
+  \vspace{2.2mm}}
+\newcommand\cvchip[1]{%
+  \tikz[baseline=(c.base)]\node[draw=linea,fill=white,rounded corners=2.2mm,
+    inner xsep=1.9mm,inner ysep=1.15mm,font=\fontsize{7.4}{8}\selectfont\color{tinta}](c){\strut #1};}
+\newcommand\cvgrupotec[2]{%
+  {\jakarta\fontsize{8.2}{10}\selectfont #1}\par\vspace{1.4mm}%
+  {\baselineskip=0pt\lineskip=1.3mm\lineskiplimit=0pt\raggedright
+   \forcsvlist{\cvchipsep}{#2}\par}\vspace{3mm}}
+\newcommand\cvchipsep[1]{\cvchip{#1}\hspace{1.1mm}\allowbreak}
+\newcommand\cvidioma[3]{%
+  \bandera{#1}\hspace{2.2mm}{\fontsize{8.9}{11}\selectfont #2}\hfill
+  {\mono\fontsize{7}{9}\selectfont\color{tenue}#3}\par\vspace{1.6mm}}
+
+% Contact strip.
+\newcommand\cvdato[2]{%
+  \mbox{{\color{acentoclaro}\fontsize{7.6}{9}\selectfont#1}\hspace{1.4mm}{\mono\fontsize{7}{9}\selectfont\color{claro}#2}}}
+\newcommand\sep{\hspace{4.2mm}\allowbreak}
+
+\begin{document}
+\vspace*{9mm}\noindent
+\begin{tikzpicture}[remember picture,overlay,x=1mm,y=1mm]
+  \begin{scope}[shift={(current page.north west)}]
+    % Dark header with a cobalt bloom, like the ink on the site.
+    \fill[fondo] (0,0) rectangle (210,-70);
+    \shade[inner color=acento!55!fondo,outer color=fondo,opacity=0.9]
+      (168,-14) ellipse (78 and 52);
+    \fill[fondo,path fading=north,opacity=0.6] (0,-44) rectangle (210,-70);
+    \draw[acentoclaro!50!fondo,line width=0.4pt] (0,-70) -- (210,-70);
+    % Portrait in a thin cobalt ring.
+    \begin{scope}
+      \clip (178,-31) circle (19);
+      \node[inner sep=0] at (178,-32.8) {\includegraphics[width=38.6mm]{foto.jpg}};
+    \end{scope}
+    \draw[acentoclaro,line width=0.8pt] (178,-31) circle (19);
+    % Sidebar panel.
+    \fill[panel] (139,-70) rectangle (210,-297.1);
+    % Footer.
+    \node[anchor=base west,inner sep=0] at (14,-289) {\mono\fontsize{6.6}{8}\selectfont\color{tenue}\cvWeb};
+    \node[anchor=base east,inner sep=0] at (196,-289) {\mono\fontsize{6.6}{8}\selectfont\color{tenue}\cvNombre\ \cvApellidos\ · CV};
+  \end{scope}
+\end{tikzpicture}%
+% --- Header ---------------------------------------------------------------
+\begin{minipage}[t]{145mm}
+  {\mono\fontsize{7.4}{9}\selectfont\color{acentoclaro}\addfontfeatures{LetterSpace=18}CURRICULUM VITAE}\par
+  \vspace{3.4mm}
+  {\jakarta\fontsize{29}{31}\selectfont\color{white}\addfontfeatures{LetterSpace=-2.5}%
+    \cvNombre\ \cvApellidos{\color{acentoclaro}.}}\par
+  \vspace{3.4mm}
+  {\jakartamedium\fontsize{13.5}{16}\selectfont\color{claro}\cvPuesto}\par
+  \vspace{1.8mm}
+  {\mono\fontsize{7.1}{9}\selectfont\color{acentoclaro}\addfontfeatures{LetterSpace=8}\MakeUppercase{\cvEnfoque}}\par
+  \vspace{4.2mm}
+  {\raggedright\baselineskip=4.4mm
+   \cvdato{\faMapMarker*}{\cvUbicacion}\sep
+   \siNacimiento{\cvdato{\faCalendar[regular]}{\cvNacimiento}\sep}%
+   \siTelefono{\cvdato{\faPhone*}{\cvTelefono}\sep}%
+   \par\cvdato{\faEnvelope[regular]}{\href{mailto:\cvEmail}{\cvEmail}}\sep
+   \cvdato{\faGlobe}{\href{https://\cvWeb}{\cvWeb}}\sep
+   \par\cvdato{\faLinkedin}{\href{https://www.linkedin.com/in/\cvLinkedin}{in/\cvLinkedin}}\sep
+   \cvdato{\faGithub}{\href{https://github.com/\cvGithub}{\cvGithub}}\sep
+   \cvdato{\aiOrcid}{\href{https://orcid.org/\cvOrcid}{\cvOrcid}}\par}
+\end{minipage}%
+\par\vspace{12mm}
+% --- Body -----------------------------------------------------------------
+\noindent
+\begin{minipage}[t]{110mm}
+  \vspace{0pt}
+  {\raggedright\jakartamedium\fontsize{10.2}{14.4}\selectfont\color{tinta}\cvResumen\par}
+  \cvseccion{\cvt{formacion}}\cvFormacion
+  \cvseccion{\cvt{experiencia}}\cvExperiencia
+  \cvseccion{\cvt{proyectos}}\cvProyectos
+  \cvseccion{\cvt{complementaria}}\cvComplementaria
+\end{minipage}%
+\hspace{21mm}%
+\begin{minipage}[t]{51mm}
+  \vspace{0pt}\vspace{-4.6mm}
+  \cvlateral{\cvt{aptitudes}}
+  \cvAptitudes
+  \cvlateral{\cvt{tecnologias}}
+  \cvTecnologias
+  \cvlateral{\cvt{idiomas}}
+  \cvIdiomas
+\end{minipage}
+\end{document}

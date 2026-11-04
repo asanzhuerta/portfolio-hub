@@ -1,0 +1,29 @@
+[
+  {
+    "name": "nuevo-trabajo",
+    "width": 1920,
+    "height": 1200,
+    "src": {
+      "es": "/projects/cover-maker/nuevo-trabajo-es.webp",
+      "en": "/projects/cover-maker/nuevo-trabajo-en.webp"
+    }
+  },
+  {
+    "name": "mezclador",
+    "width": 1920,
+    "height": 1200,
+    "src": {
+      "es": "/projects/cover-maker/mezclador-es.webp",
+      "en": "/projects/cover-maker/mezclador-en.webp"
+    }
+  },
+  {
+    "name": "modelos",
+    "width": 1920,
+    "height": 1200,
+    "src": {
+      "es": "/projects/cover-maker/modelos-es.webp",
+      "en": "/projects/cover-maker/modelos-en.webp"
+    }
+  }
+]

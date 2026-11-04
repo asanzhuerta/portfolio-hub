@@ -1,0 +1,60 @@
+% Shared by both templates: storage for the content fields, the private data,
+% flags and icons. Compile with XeLaTeX (see build.mjs).
+\usepackage{etoolbox}
+\usepackage{pgfkeys}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{fontawesome5}
+\usepackage{academicons}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+% --- Content fields --------------------------------------------------------
+\newcommand\cvnombre[2]{\def\cvNombre{#1}\def\cvApellidos{#2}}
+\newcommand\cvpuesto[1]{\def\cvPuesto{#1}}
+\newcommand\cvenfoque[1]{\def\cvEnfoque{#1}}
+\newcommand\cvresumen[1]{\def\cvResumen{#1}}
+\newcommand\cvubicacion[1]{\def\cvUbicacion{#1}}
+\newcommand\cvemail[1]{\def\cvEmail{#1}}
+\newcommand\cvlinkedin[1]{\def\cvLinkedin{#1}}
+\newcommand\cvgithub[1]{\def\cvGithub{#1}}
+\newcommand\cvorcid[1]{\def\cvOrcid{#1}}
+\newcommand\cvweb[1]{\def\cvWeb{#1}}
+\newcommand\cvtelefono[1]{\def\cvTelefono{#1}}
+\newcommand\cvnacimiento[1]{\def\cvNacimiento{#1}}
+
+% Section titles: \cvtitulos{clave=Título, ...} and \cvt{clave}.
+\pgfkeys{/cvt/.unknown/.code={\csdef{cvt@\pgfkeyscurrentname}{#1}}}
+\newcommand\cvtitulos[1]{\pgfqkeys{/cvt}{#1}}
+\newcommand\cvt[1]{\csuse{cvt@#1}}
+
+% --- Private data ----------------------------------------------------------
+% privado.tex (git-ignored) holds the phone number and birth date. The public
+% build (\cvpublico) leaves them out even when the file exists.
+\providetoggle{cvpublico}
+\ifdefined\cvpublic\toggletrue{cvpublico}\fi
+\IfFileExists{privado.tex}{\input{privado.tex}}{}
+\iftoggle{cvpublico}{\let\cvTelefono\relax\let\cvNacimiento\relax}{}
+\newcommand\siTelefono[1]{\ifdefined\cvTelefono\ifx\cvTelefono\relax\else#1\fi\fi}
+\newcommand\siNacimiento[1]{\ifdefined\cvNacimiento\ifx\cvNacimiento\relax\else#1\fi\fi}
+
+% --- Flags -----------------------------------------------------------------
+\newcommand\bandera[1]{%
+  \begin{tikzpicture}[x=1mm,y=1mm,baseline=0.6mm]
+    \ifstrequal{#1}{es}{%
+      \fill[red!80!black] (0,0) rectangle (9,6);
+      \fill[yellow!85!orange] (0,1.5) rectangle (9,4.5);
+      \fill[red!70!black] (2,2.4) rectangle (3.2,3.6);
+    }{%
+      \fill[blue!50!black] (0,0) rectangle (9,6);
+      \begin{scope}
+        \clip (0,0) rectangle (9,6);
+        \draw[white,line width=1.2mm] (0,0) -- (9,6) (0,6) -- (9,0);
+        \draw[red!80!black,line width=0.4mm] (0,0) -- (9,6) (0,6) -- (9,0);
+      \end{scope}
+      \fill[white] (3.6,0) rectangle (5.4,6) (0,2.1) rectangle (9,3.9);
+      \fill[red!80!black] (3.95,0) rectangle (5.05,6) (0,2.45) rectangle (9,3.55);
+    }
+  \end{tikzpicture}}
+
+\setlist{nosep}

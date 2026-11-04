@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 // Ink swirling in water: domain-warped fBm around a vortex. The scroll drives it:
 // scrolling down carries the ink upwards, winds the vortex and, the faster you
-// scroll, stirs the warp harder. Without scrolling it barely drifts. Cobalt only
+// scroll, stirs the warp harder. Without scrolling it barely drifts. The cobalt blue only
 // shows in the thin, bright filaments.
 const FRAGMENT = `#version 300 es
 precision highp float;
@@ -62,10 +62,13 @@ void main() {
   float fold = smoothstep(0.32, 0.5, f * length(w));
   float filament = fold * (1.0 - ink);
 
-  vec3 water = vec3(0.075, 0.078, 0.09);
-  vec3 col = mix(water, vec3(0.006, 0.007, 0.009), ink);
-  col += vec3(0.17, 0.175, 0.19) * filament * smoothstep(0.3, 0.7, q.x);
-  col += vec3(0.03, 0.11, 0.42) * filament * smoothstep(0.45, 0.75, q.y);
+  // About a fifth of the ink carries cobalt: a cold tint in the smoky water and
+  // the brighter filaments where the warp runs one way.
+  float cobalt = smoothstep(0.38, 0.68, q.y);
+  vec3 water = mix(vec3(0.072, 0.076, 0.088), vec3(0.04, 0.06, 0.15), cobalt * 0.4);
+  vec3 col = mix(water, vec3(0.006, 0.007, 0.012), ink);
+  col += vec3(0.17, 0.175, 0.19) * filament * smoothstep(0.3, 0.7, q.x) * (1.0 - cobalt * 0.6);
+  col += vec3(0.05, 0.15, 0.6) * filament * cobalt;
 
   // Vignette and grain keep the centre readable and avoid banding.
   col *= 1.0 - 0.55 * smoothstep(0.4, 1.4, length(uv));

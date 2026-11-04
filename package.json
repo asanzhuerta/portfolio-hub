@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cv": "node cv/build.mjs",
+    "screenshots": "node scripts/cover-maker-screenshots.mjs"
   },
   "dependencies": {
     "next": "16.4.5",

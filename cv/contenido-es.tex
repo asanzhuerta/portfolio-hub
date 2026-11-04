@@ -1,0 +1,84 @@
+% Contenido del CV en español. Es la única fuente de datos: las dos plantillas
+% (cv-replica.tex y cv.tex) lo leen y solo cambian la forma de mostrarlo.
+% El teléfono y la fecha de nacimiento van en privado.tex (no se sube a GitHub).
+
+\cvnombre{Alejandro}{Sanz Huerta}
+\cvpuesto{Ingeniero Informático}
+\cvenfoque{Full-stack Development · Systems Architecture · Applied AI}
+\cvresumen{Graduado en Ingeniería Informática con experiencia en desarrollo
+  full-stack, investigación aplicada y gestión de proyectos tecnológicos. Me
+  motiva crear soluciones escalables y bien diseñadas, aprendiendo
+  continuamente y aportando valor desde el primer día.}
+
+\cvubicacion{Cádiz, España}
+\cvemail{alejandro.sanzhuerta.dev@gmail.com}
+\cvlinkedin{alejandro-sanz-huerta}
+\cvgithub{asanzhuerta}
+\cvorcid{0009-0003-1237-0367}
+\cvweb{asanzhuerta.netlify.app}
+
+\cvtitulos{%
+  contacto=Contacto, idiomas=Idiomas, tecnologias=Tecnologías,
+  formacion=Formación, aptitudes=Aptitudes, experiencia=Experiencia laboral,
+  proyectos=Proyectos destacados, complementaria=Experiencia complementaria,
+  perfil=Perfil}
+
+\newcommand\cvIdiomas{%
+  \cvidioma{es}{Español}{Nativo}
+  \cvidioma{gb}{Inglés}{B2 (Cambridge)}}
+
+\newcommand\cvTecnologias{%
+  \cvgrupotec{Lenguajes de programación}{C, C++, C\#, Python, Java, Kotlin, JS, TS, PHP}
+  \cvgrupotec{Desarrollo web}{HTML / CSS, Laravel, Node JS, React, Next JS}
+  \cvgrupotec{Bases de datos}{PostgreSQL, Oracle, MySQL}
+  \cvgrupotec{Otros conocimientos}{Unity, Git, Pentaho, Claude, Codex, Docker, Google Workspace, Canva}}
+
+\newcommand\cvFormacion{%
+  \cvcentro{Universidad de Cádiz}
+  \begin{cvlista}
+    \item \cvestudio{Grado en Ingeniería Informática, mención en Sistemas de Información}{2019 – 2026}
+    \item \cvestudio{Máster en Investigación en Ingeniería de Sistemas y de la Computación}{2026 – actualmente}
+  \end{cvlista}
+  \cvcentro{IES Fuerte de Cortadura}
+  \begin{cvlista}
+    \item \cvestudio{Bachillerato Tecnológico}{2017 – 2019}
+    \item \cvestudio{Enseñanza Secundaria Obligatoria}{2013 – 2017}
+  \end{cvlista}}
+
+\newcommand\cvAptitudes{%
+  \begin{cvlista}
+    \item Arquitectura y desarrollo de aplicaciones
+    \item Resolución de problemas
+    \item Diseño de APIs y bases de datos
+    \item Trabajo en equipo y comunicación técnica
+    \item Documentación y buenas prácticas
+    \item Aprendizaje continuo
+  \end{cvlista}}
+
+\newcommand\cvExperiencia{%
+  \cvpuestotrabajo{Prácticas de empresa}
+    {Departamento de Ingeniería Informática (Campus de Jerez)}
+    {Desarrollo y evaluación de programas para sistemas de realidad virtual con
+     seguimiento ocular, colaborando con un equipo multidisciplinar de
+     neuromarketing}
+  \cvpuestotrabajo{Voluntariado en Madre Coraje}
+    {Fundación Madre Coraje (Guadalcacín, Jerez de la Frontera)}
+    {\begin{cvlista}
+       \item Auditoría de equipos informáticos
+       \item Re-organización de cableado y etiquetado de red
+     \end{cvlista}}}
+
+\newcommand\cvProyectos{%
+  \begin{cvlista}
+    \item \cvdestacado{Aplicación web progresiva para la gestión comercial en la
+      distribución de productos capilares}{(Trabajo Fin De Grado, Matrícula de Honor)}
+    \item \cvdestacado{Paper científico:}{Offline Dynamic AOI Generation and Runtime
+      Gaze Mapping for 360° Video in Virtual Reality: A Systems and Feasibility
+      Study. (Enviado a Virtual Reality – Springer Nature)}
+  \end{cvlista}}
+
+\newcommand\cvComplementaria{%
+  \begin{cvlista}
+    \item \cvrol{Co-organizador - Coord. Logística:}{Festival ACÚSTICA}
+    \item \cvrol{Dirección de proyecto musical autogestionado:}{ODISEA}
+  \end{cvlista}}

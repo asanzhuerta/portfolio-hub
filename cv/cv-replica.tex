@@ -1,0 +1,154 @@
+% Réplica del CV original (Canva): columna lateral gris con cabecera azul
+% marino y columna principal con barras de sección.
+%   xelatex "\def\cvlang{es}\input{cv-replica}"   (o: node build.mjs)
+\documentclass[10pt]{article}
+\usepackage[a4paper,left=77.7mm,right=7mm,top=0mm,bottom=0mm]{geometry}
+\input{comun}
+\usepackage{fontspec}
+\usepackage{xcolor}
+
+\providecommand\cvlang{es}
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Lora}[
+  Path=../assets/fonts/, Extension=.ttf,
+  UprightFont=*-Regular, BoldFont=*-Bold,
+  ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\newfontfamily\lato{Lato}[
+  Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold]
+\newfontfamily\latoheavy{Lato-Heavy.ttf}
+\newfontfamily\latoblack{Lato-Black.ttf}
+
+\definecolor{navy}{HTML}{2C3E50}
+\definecolor{lateral}{HTML}{D9D9D9}
+\definecolor{chip}{HTML}{5B7D95}
+\definecolor{tinta}{HTML}{2B2B2B}
+
+\pagestyle{empty}
+\setlength\parindent{0pt}
+\hyphenpenalty=10000\exhyphenpenalty=10000
+\color{tinta}
+
+\input{contenido-\cvlang}
+
+% --- Main column pieces ----------------------------------------------------
+\newcommand\cvbarra[1]{%
+  \par\vspace{3.2mm}%
+  \noindent\hspace*{-4.7mm}%
+  {\setlength\fboxsep{0pt}\colorbox{navy}{\parbox[c][9mm]{140mm}{%
+    \hspace{8.5mm}{\color{white}\latoblack\fontsize{12.5}{14}\selectfont
+    \raisebox{0.25ex}{\tikz\fill[white] circle (1.05mm);}\hspace{2mm}%
+    \addfontfeatures{LetterSpace=10}\MakeUppercase{#1}}}}}%
+  \par\vspace{2.6mm}}
+
+\newcommand\cvcentro[1]{%
+  \par\vspace{1.2mm}\hspace*{8mm}%
+  {\bfseries\fontsize{11.6}{14}\selectfont\addfontfeatures{LetterSpace=5}\MakeUppercase{#1}}\par\vspace{0.6mm}}
+
+\newenvironment{cvlista}
+  {\begin{itemize}[leftmargin=13.5mm,labelsep=2.2mm,itemsep=0.45mm,
+      label={\normalfont\textbullet}]\raggedright\itshape\fontsize{10.6}{14.6}\selectfont\addfontfeatures{LetterSpace=2.5}}
+  {\end{itemize}}
+
+\newcommand\cvestudio[2]{#1 (#2)}
+
+\newcommand\cvpuestotrabajo[3]{%
+  \cvcentro{#1}%
+  \hspace*{8mm}{\bfseries\itshape\fontsize{10.6}{14.6}\selectfont\addfontfeatures{LetterSpace=1.5}#2}\par
+  {\raggedright\leftskip=8mm\itshape\fontsize{10.6}{14.6}\selectfont\addfontfeatures{LetterSpace=2.5}#3\par}%
+  \vspace{2.4mm}}
+
+\newcommand\cvdestacado[2]{{\upshape\bfseries #1} #2}
+\newcommand\cvrol[2]{{\upshape\bfseries #1} {\upshape #2}}
+
+% --- Sidebar pieces --------------------------------------------------------
+\newcommand\cvidioma[3]{}
+\newcommand\cvchip[1]{%
+  \tikz[baseline=-0.6ex]\node[ellipse,fill=chip,text=white,inner sep=0.3mm,
+    minimum height=7.4mm,minimum width=10.4mm,font=\latoblack,
+    align=center]{\cvchiplabel{#1}};}
+\newcommand\cvchiplabel[1]{%
+  \StrLen{#1}[\cvlen]%
+  \ifnum\cvlen<4 \fontsize{7.6}{8}\selectfont\MakeUppercase{#1}%
+  \else\fontsize{4.4}{4.8}\selectfont
+    \ifnum\cvlen>9 \parbox{8.6mm}{\centering\MakeUppercase{#1}}\else\MakeUppercase{#1}\fi\fi}
+\usepackage{xstring}
+\usetikzlibrary{shapes.geometric}
+\newcommand\cvgrupotec[2]{%
+  {\latoblack\fontsize{7.3}{9}\selectfont\addfontfeatures{LetterSpace=6}\MakeUppercase{#1}}\par
+  \vspace{1.4mm}%
+  {\baselineskip=0pt\lineskip=1.5mm\lineskiplimit=0pt\raggedright
+   \forcsvlist{\cvchipsep}{#2}\par}\vspace{3.4mm}}
+\newcommand\cvchipsep[1]{\cvchip{#1}\hspace{1.3mm}\allowbreak}
+
+\newcommand\fila[3]{% y (mm from top), icon, text
+  \node[anchor=base west,inner sep=0] at (8mm,-#1mm) {\color{black}\fontsize{9}{10}\selectfont#2};
+  \node[anchor=base west,inner sep=0] at (12.6mm,-#1mm) {\lato\fontsize{8.6}{10}\selectfont\color{black!85}#3};}
+\newcommand\enlace[2]{\href{#1}{\underline{#2}}}
+\newcommand\titulolateral[2]{%
+  \node[anchor=base west,inner sep=0] at (9mm,-#1mm)
+    {\latoblack\fontsize{13}{15}\selectfont\addfontfeatures{LetterSpace=10}\color{black!90}\MakeUppercase{#2}};}
+\newcommand\separador[1]{\draw[black,line width=0.55pt] (0,-#1mm) -- (72.9mm,-#1mm);}
+
+\begin{document}
+\vspace*{7.4mm}\noindent
+\begin{tikzpicture}[remember picture,overlay,x=1mm,y=1mm]
+  \begin{scope}[shift={(current page.north west)}]
+    % Backgrounds.
+    \fill[lateral] (0,0) rectangle (72.9,-297.1);
+    \fill[navy] (0,0) rectangle (72.9,-77.2);
+    \fill[navy] (72.9,0) rectangle (210.1,-52.2);
+
+    % Portrait.
+    \begin{scope}
+      \clip (36.3,-27.2) circle (21.4);
+      \node[inner sep=0] at (36.3,-29.2) {\includegraphics[width=43.6mm]{foto.jpg}};
+    \end{scope}
+    \draw[white!70!navy,line width=0.7pt] (36.3,-27.2) circle (21.4);
+
+    % Name.
+    \node[anchor=base,inner sep=0] at (36.3,-57.3)
+      {\latoheavy\fontsize{19.5}{22}\selectfont\addfontfeatures{LetterSpace=4}\color{white}\MakeUppercase{\cvNombre}};
+    \node[anchor=base,inner sep=0] at (36.3,-63.4)
+      {\latoheavy\fontsize{17}{20}\selectfont\addfontfeatures{LetterSpace=4}\color{white}\MakeUppercase{\cvApellidos}};
+    \node[anchor=base,inner sep=0] at (36.3,-71.7)
+      {\lato\fontsize{12.4}{14}\selectfont\addfontfeatures{LetterSpace=2}\color{white}\cvPuesto};
+
+    % Personal details.
+    \fila{85.7}{\faMapMarker*}{\cvUbicacion}
+    \siNacimiento{\fila{95.2}{\faCalendar[regular]}{\cvNacimiento}}
+    \separador{101.0}
+    \titulolateral{108.0}{\cvt{contacto}}
+    \siTelefono{\fila{115.0}{\faPhone*}{\cvTelefono}}
+    \fila{124.6}{\faEnvelope[regular]}{\enlace{mailto:\cvEmail}{\cvEmail}}
+    \fila{134.2}{\faLinkedin}{\enlace{https://www.linkedin.com/in/\cvLinkedin}{\cvLinkedin}}
+    \fila{143.8}{\faGithub}{\enlace{https://github.com/\cvGithub}{\cvGithub}}
+    \fila{153.4}{\aiOrcid}{\enlace{https://orcid.org/\cvOrcid}{\cvOrcid}}
+    \separador{160.7}
+    \titulolateral{168.6}{\cvt{idiomas}}
+    \renewcommand\cvidioma[3]{%
+      \node[anchor=west,inner sep=0] at (\cvx,-178.2) {\bandera{#1}};
+      \node[anchor=west,inner sep=0,align=left] at (\cvx+10.3,-178.2)
+        {\lato\fontsize{8.6}{9.6}\selectfont#2\\#3};
+      \pgfmathsetmacro\cvx{\cvx+24.6}\xdef\cvx{\cvx}}
+    \def\cvx{6.8}
+    \cvIdiomas
+    \separador{185.9}
+    \titulolateral{195.4}{\cvt{tecnologias}}
+    \node[anchor=north west,inner sep=0,text width=66mm] at (5.2,-198.8) {\cvTecnologias};
+  \end{scope}
+\end{tikzpicture}%
+{\color{white}\tolerance=9999\emergencystretch=4em\fontsize{12.4}{18.6}\selectfont\addfontfeatures{LetterSpace=2.5}\cvResumen\par}
+\vspace{-1.6mm}
+\cvbarra{\cvt{formacion}}
+\cvFormacion
+\cvbarra{\cvt{aptitudes}}
+\cvAptitudes
+\cvbarra{\cvt{experiencia}}
+\cvExperiencia
+\vspace{-2.4mm}
+\cvbarra{\cvt{proyectos}}
+\cvProyectos
+\cvbarra{\cvt{complementaria}}
+\cvComplementaria
+\end{document}
