@@ -42,15 +42,16 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
       className="flex flex-col gap-28 pb-28 sm:gap-36"
       style={{ "--accent": "#e5484d", "--accent-strong": "#b4232c" } as React.CSSProperties}
     >
-      <section className="relative grid min-h-[calc(100svh-4rem)] items-center gap-10 py-16 md:grid-cols-[1fr_1fr]">
-        <div className="relative z-10 flex flex-col gap-8">
-          <Link
-            data-reveal
-            href={href(lang, "/paralelos")}
-            className="w-fit font-mono text-xs uppercase tracking-widest text-muted transition-colors hover:text-foreground"
-          >
-            ← {t.side.title}
-          </Link>
+      <section className="relative grid items-center gap-8 py-10 sm:py-16 md:min-h-[calc(100svh-4rem)] md:content-center md:grid-cols-[1fr_1fr] md:gap-10">
+        {/* First thing on every screen size; above the photo on phones. */}
+        <Link
+          data-reveal
+          href={href(lang, "/paralelos")}
+          className="order-first w-fit font-mono text-xs uppercase tracking-widest text-muted transition-colors hover:text-foreground md:col-span-2 md:self-end"
+        >
+          ← {t.side.title}
+        </Link>
+        <div className="relative z-10 flex flex-col gap-8 -mt-16 sm:-mt-24 md:mt-0">
           <h1 data-reveal style={stagger(1)}>
             <Image
               src={odisea.logo.src}
@@ -79,11 +80,12 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
             ))}
           </div>
         </div>
-        {/* The band photo dissolves into the ink, like the portrait on the home page. */}
+        {/* The band, cut out: above the text on phones, beside it from tablets up.
+            The glow follows the silhouette (drop-shadow on the cut-out's alpha). */}
         <div
           data-reveal
           style={stagger(2)}
-          className="pointer-events-none absolute inset-y-0 right-0 w-full opacity-35 md:relative md:w-auto md:opacity-100"
+          className="pointer-events-none order-first -mx-4 sm:mx-0 md:order-none"
         >
           <Image
             src={odisea.photo.src}
@@ -91,8 +93,8 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
             width={odisea.photo.width}
             height={odisea.photo.height}
             priority
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className="h-full w-full object-cover [mask-image:radial-gradient(ellipse_72%_70%_at_50%_44%,black_45%,transparent_82%)] md:h-auto"
+            unoptimized
+            className="h-auto w-full drop-shadow-[0_0_36px_rgb(229_72_77/0.35)] [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]"
           />
         </div>
       </section>

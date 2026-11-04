@@ -44,15 +44,16 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
       className="flex flex-col gap-28 pb-28 sm:gap-36"
       style={{ "--accent": "#9b84f0", "--accent-strong": "#6a4fc9" } as React.CSSProperties}
     >
-      <section className="relative grid min-h-[calc(100svh-4rem)] items-center gap-10 py-16 md:grid-cols-[1.15fr_0.85fr]">
-        <div className="relative z-10 flex flex-col gap-8">
-          <Link
-            data-reveal
-            href={href(lang, "/paralelos")}
-            className="w-fit font-mono text-xs uppercase tracking-widest text-muted transition-colors hover:text-foreground"
-          >
-            ← {t.side.title}
-          </Link>
+      <section className="relative grid items-center gap-8 py-10 sm:py-16 md:min-h-[calc(100svh-4rem)] md:content-center md:grid-cols-[1.15fr_0.85fr] md:gap-10">
+        {/* First thing on every screen size; above the photo on phones. */}
+        <Link
+          data-reveal
+          href={href(lang, "/paralelos")}
+          className="order-first w-fit font-mono text-xs uppercase tracking-widest text-muted transition-colors hover:text-foreground md:col-span-2 md:self-end"
+        >
+          ← {t.side.title}
+        </Link>
+        <div className="relative z-10 flex flex-col gap-8 -mt-20 sm:-mt-28 md:mt-0">
           <h1 data-reveal style={stagger(1)}>
             <Image
               src={orion.logo.src}
@@ -89,7 +90,7 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
         <div
           data-reveal
           style={stagger(2)}
-          className="pointer-events-none absolute inset-y-0 right-0 w-full opacity-35 md:relative md:w-auto md:opacity-100"
+          className="pointer-events-none order-first flex justify-center md:order-none md:justify-end"
         >
           <Image
             src={orion.photo.src}
@@ -97,8 +98,8 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
             width={orion.photo.width}
             height={orion.photo.height}
             priority
-            sizes="(min-width: 768px) 40vw, 100vw"
-            className="ml-auto h-full max-h-[80svh] w-auto object-contain drop-shadow-[0_0_40px_rgb(155_132_240/0.25)] [mask-image:linear-gradient(to_bottom,black_72%,transparent_98%)]"
+            unoptimized
+            className="h-auto max-h-[46svh] w-auto drop-shadow-[0_0_40px_rgb(155_132_240/0.35)] [mask-image:linear-gradient(to_bottom,black_72%,transparent_100%)] md:max-h-[80svh]"
           />
         </div>
       </section>
@@ -197,23 +198,8 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
         </div>
       </section>
 
-      <section id="visuales" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="03" title={o.visuals} />
-        <p data-reveal className="-mt-4 max-w-2xl leading-relaxed text-muted">
-          {o.visualsIntro}
-        </p>
-        <Lightbox
-          labels={t.lightbox}
-          grid="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
-          featureFirst={false}
-          captions={false}
-          sizes="(min-width: 1024px) 220px, (min-width: 640px) 33vw, 50vw"
-          images={orion.gallery.map((image) => ({ ...image, alt: image.alt[lang], caption: image.alt[lang] }))}
-        />
-      </section>
-
       <section id="medios" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="04" title={o.press} />
+        <SectionHeading index="03" title={o.press} />
         <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {orion.press.map((item, i) => (
             <li key={item.href} data-reveal style={stagger(i % 3)}>
@@ -238,18 +224,29 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
       </section>
 
       <section id="colaboradores" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="05" title={o.partners} />
+        <SectionHeading index="04" title={o.partners} />
         <ul data-reveal className="flex flex-wrap gap-3">
           {orion.partners.map((partner) => (
-            <li key={partner} className="rounded-full border border-line px-4 py-2 text-sm text-muted">
-              {partner}
+            <li key={partner.name}>
+              {partner.href ? (
+                <a
+                  href={partner.href}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm text-muted transition-colors hover:border-accent/60 hover:text-foreground"
+                >
+                  {partner.name} <Icon name="arrow" className="h-3.5 w-3.5 -rotate-45" />
+                </a>
+              ) : (
+                <span className="inline-flex rounded-full border border-line px-4 py-2 text-sm text-muted">{partner.name}</span>
+              )}
             </li>
           ))}
         </ul>
       </section>
 
       <section id="web" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="06" title={o.next} />
+        <SectionHeading index="05" title={o.next} />
         <div data-reveal className={`${panel} relative isolate flex flex-col gap-5 overflow-hidden p-8 sm:p-12`}>
           <div
             aria-hidden="true"
