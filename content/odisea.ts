@@ -59,7 +59,7 @@ export const odisea = {
   ] as const,
   spotifyArtist: "02e70YYx2pauBnKAIvCp68",
   videos: [
-    // The first one is shown big: Penitencia, the best video the band made.
+    // Penitencia first: the best video the band made.
     { id: "KjrV4BF63wg", title: "Penitencia", kind: { es: "Videoclip oficial", en: "Official video" } },
     { id: "lmCesAEwdSE", title: "Ciempiés", kind: { es: "Videoclip oficial", en: "Official video" } },
     { id: "qqwzT-Qs6t8", title: "Spielzeug", kind: { es: "Lyric video oficial", en: "Official lyric video" } },

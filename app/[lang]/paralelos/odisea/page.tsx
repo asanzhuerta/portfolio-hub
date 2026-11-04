@@ -141,10 +141,10 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
 
       <section id="videos" className="flex scroll-mt-24 flex-col gap-10">
         <SectionHeading index="03" title={o.videos} />
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {odisea.videos.map((video, i) => (
-            <figure key={video.id} data-reveal style={stagger(i % 2)} className={`flex flex-col gap-3 ${i === 0 ? "md:col-span-2" : ""}`}>
-              <YouTube id={video.id} title={`ODISEA – ${video.title}`} label={o.play} />
+            <figure key={video.id} data-reveal style={stagger(i % 3)} className="flex flex-col gap-3">
+              <YouTube id={video.id} title={`ODISEA – ${video.title}`} label={o.play} size="sm" />
               <figcaption className="flex items-baseline justify-between gap-4">
                 <span className="font-display text-lg font-semibold tracking-tight">{video.title}</span>
                 <span className="font-mono text-[11px] uppercase tracking-widest text-faint">{video.kind[lang]}</span>
@@ -156,9 +156,9 @@ export default async function OdiseaPage({ params }: PageProps<"/[lang]/paralelo
           <h3 data-reveal className="font-mono text-xs uppercase tracking-widest text-faint">
             {o.live}
           </h3>
-          <div className="grid gap-5 sm:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {odisea.live.map((video, i) => (
-              <figure key={video.id} data-reveal style={stagger(i)} className="flex flex-col gap-2">
+              <figure key={video.id} data-reveal style={stagger(i % 3)} className="flex flex-col gap-2">
                 <YouTube id={video.id} title={`ODISEA – ${video.title}`} label={o.play} size="sm" />
                 <figcaption className="flex items-baseline justify-between gap-3">
                   <span className="font-semibold">{video.title}</span>
