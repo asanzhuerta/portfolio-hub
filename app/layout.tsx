@@ -48,15 +48,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <header className="sticky top-0 z-20 border-b border-line bg-background/50 backdrop-blur-md">
           <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-3 sm:px-8">
             <Link href="/" className="whitespace-nowrap font-display text-[15px] font-semibold tracking-tight">
-              Alejandro Sanz<span className="text-accent">.</span>
+              <span className="sm:hidden">A. Sanz</span>
+              <span className="hidden sm:inline">Alejandro Sanz</span>
+              <span className="text-accent">.</span>
             </Link>
             <nav aria-label="Principal">
-              <ul className="flex gap-1 text-sm text-muted">
+              <ul className="flex text-[13px] text-muted sm:gap-1 sm:text-sm">
                 {nav.map((item) => (
                   <li key={item.href} className={item.href === "/#bio" ? "hidden sm:block" : undefined}>
                     <Link
                       href={item.href}
-                      className="inline-flex min-h-11 items-center rounded-full px-3 transition-colors hover:bg-white/5 hover:text-foreground"
+                      className="inline-flex min-h-11 items-center rounded-full px-2 transition-colors sm:px-3 hover:bg-white/5 hover:text-foreground"
                     >
                       {item.label}
                     </Link>
