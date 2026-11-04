@@ -93,7 +93,8 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
   const index = (name: string) => String(sections.indexOf(name) + 1).padStart(2, "0");
 
   return (
-    <article className="flex flex-col gap-24 pb-28 pt-16 sm:pt-24">
+    // Each project can carry its own accent (Cover_Maker: the violet of its logo).
+    <article className="flex flex-col gap-24 pb-28 pt-16 sm:pt-24" style={project.accent ? ({ "--accent": project.accent[0], "--accent-strong": project.accent[1] } as React.CSSProperties) : undefined}>
       <header className="flex flex-col gap-8">
         <div data-reveal className="flex items-center gap-5">
           <Image

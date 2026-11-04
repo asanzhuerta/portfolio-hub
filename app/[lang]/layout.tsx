@@ -80,6 +80,10 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
       className={`${geistSans.variable} ${geistMono.variable} ${jakarta.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
+        {/* Without JavaScript the scroll reveal never runs: show everything. */}
+        <noscript>
+          <style>{"[data-reveal]{opacity:1!important;filter:none!important;transform:none!important}"}</style>
+        </noscript>
         <InkBackground />
         <RevealObserver />
         <SmoothScroll />

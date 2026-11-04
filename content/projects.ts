@@ -39,6 +39,8 @@ export type Project = {
   /** Square icon in public/, shown on the card and the project page. */
   icon: string;
   screenshots: Screenshot[];
+  /** Accent colours of the project page: [accent, strong]. */
+  accent?: [string, string];
   /** Shown on the project page, below the download button. */
   notice?: Localized;
 };
@@ -47,6 +49,7 @@ export const projects: Project[] = [
   {
     slug: "cover-maker",
     icon: "/cover-maker.svg",
+    accent: ["#8f7bff", "#6b4eff"],
     name: "Cover_Maker",
     tagline: {
       es: "Separación de stems con IA, en local, para músicos y productores.",

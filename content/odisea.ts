@@ -5,7 +5,7 @@ export const odisea = {
   slug: "odisea",
   name: "ODISEA",
   logo: { src: "/side/odisea.webp", width: 1400, height: 553 },
-  photo: { src: "/side/odisea/banda-fundido.webp", width: 1414, height: 925 },
+  photo: { src: "/side/odisea/banda-fundido.webp", width: 1500, height: 1005 },
   kicker: { es: "Metalcore alternativo · Cádiz · 2022 – 2026", en: "Alternative metalcore · Cádiz · 2022 – 2026" },
   intro: {
     es: "Mi antigua banda. Melodías intensas, riffs contundentes y una estética cuidada al detalle, entre la rabia y la sensibilidad.",

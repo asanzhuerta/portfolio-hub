@@ -53,7 +53,7 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
         >
           ← {t.side.title}
         </Link>
-        <div className="relative z-10 flex flex-col gap-8 md:col-start-1 md:row-start-2 md:self-start -mt-20 sm:-mt-28 md:mt-0">
+        <div className="relative z-10 flex flex-col gap-8 md:col-start-1 md:row-start-2 md:self-start -mt-24 sm:-mt-32 md:mt-0">
           <h1 data-reveal style={stagger(1)}>
             <Image
               src={orion.logo.src}
@@ -99,7 +99,7 @@ export default async function OrionPage({ params }: PageProps<"/[lang]/paralelos
             height={orion.photo.height}
             priority
             unoptimized
-            className="h-auto max-h-[46svh] w-auto drop-shadow-[0_0_40px_rgb(155_132_240/0.35)] md:max-h-[80svh]"
+            className="h-auto max-h-[60svh] w-auto max-w-full drop-shadow-[0_0_40px_rgb(155_132_240/0.35)] md:max-h-[80svh]"
           />
         </div>
       </section>

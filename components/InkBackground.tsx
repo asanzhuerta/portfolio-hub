@@ -81,17 +81,20 @@ void main() {
 
 type Palette = { tint: [number, number, number]; water: [number, number, number] };
 
-const PALETTES: Record<"cobalt" | "blood" | "ritual", Palette> = {
+const PALETTES: Record<"cobalt" | "blood" | "ritual" | "studio", Palette> = {
   cobalt: { tint: [0.055, 0.165, 0.66], water: [0.04, 0.062, 0.16] },
   // The deep red of ODISEA's artwork.
   blood: { tint: [0.6, 0.035, 0.05], water: [0.15, 0.025, 0.03] },
   // The purple of Orion Rituals' Halloween poster.
   ritual: { tint: [0.42, 0.26, 0.82], water: [0.13, 0.09, 0.25] },
+  // Cover_Maker's logo: violet filaments in a magenta haze.
+  studio: { tint: [0.4, 0.33, 0.86], water: [0.19, 0.05, 0.13] },
 };
 
 export function paletteFor(pathname: string): keyof typeof PALETTES {
   if (/\/paralelos\/odisea(\/|$)/.test(pathname)) return "blood";
   if (/\/paralelos\/orion-rituals(\/|$)/.test(pathname)) return "ritual";
+  if (/\/projects\/cover-maker(\/|$)/.test(pathname)) return "studio";
   return "cobalt";
 }
 

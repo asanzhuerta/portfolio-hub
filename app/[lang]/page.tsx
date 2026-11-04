@@ -180,16 +180,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </ul>
       </section>
 
-      <section id="trayectoria" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="03" title={t.home.path} />
-        <div className="grid gap-10 md:grid-cols-2">
-          <Timeline title={t.home.education} entries={profile.education} lang={lang} />
-          <Timeline title={t.home.experience} entries={profile.experience} lang={lang} />
-        </div>
-      </section>
-
       <section id="stack" className="flex scroll-mt-24 flex-col gap-10">
-        <SectionHeading index="04" title={t.home.stack} />
+        <SectionHeading index="03" title={t.home.stack} />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {profile.technologies.map((group, i) => (
             <div key={group.group.es} data-reveal style={stagger(i % 3)} className={`${panel} flex flex-col gap-4 p-5`}>
@@ -203,6 +195,14 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               </ul>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section id="trayectoria" className="flex scroll-mt-24 flex-col gap-10">
+        <SectionHeading index="04" title={t.home.path} />
+        <div className="grid gap-10 md:grid-cols-2">
+          <Timeline title={t.home.education} entries={profile.education} lang={lang} />
+          <Timeline title={t.home.experience} entries={profile.experience} lang={lang} />
         </div>
       </section>
 
