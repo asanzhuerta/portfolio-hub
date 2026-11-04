@@ -1,17 +1,20 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 // Ink swirling in water: domain-warped fBm around a vortex. The scroll drives it:
 // scrolling down carries the ink upwards, winds the vortex and, the faster you
-// scroll, stirs the warp harder. Without scrolling it barely drifts. The cobalt blue only
-// shows in the thin, bright filaments.
+// scroll, stirs the warp harder. Without scrolling it barely drifts. A fifth of the
+// ink carries a colour: cobalt blue across the site, blood red on ODISEA's page.
 const FRAGMENT = `#version 300 es
 precision highp float;
 uniform vec2 uRes;
 uniform float uTime;
 uniform float uScroll; // scroll position, in viewport heights
 uniform float uStir;   // smoothed scroll speed, 0..1
+uniform vec3 uTint;    // colour of the bright filaments
+uniform vec3 uWater;   // colour the smoky water leans towards
 out vec4 outColor;
 
 float hash(vec2 p) {
@@ -62,19 +65,31 @@ void main() {
   float fold = smoothstep(0.32, 0.5, f * length(w));
   float filament = fold * (1.0 - ink);
 
-  // About a fifth of the ink carries cobalt: a cold tint in the smoky water and
-  // the brighter filaments where the warp runs one way.
+  // Part of the ink carries the tint: in the smoky water and the brighter
+  // filaments where the warp runs one way.
   float cobalt = smoothstep(0.38, 0.68, q.y);
-  vec3 water = mix(vec3(0.072, 0.076, 0.088), vec3(0.04, 0.06, 0.15), cobalt * 0.4);
+  vec3 water = mix(vec3(0.072, 0.076, 0.088), uWater, cobalt * 0.5);
   vec3 col = mix(water, vec3(0.006, 0.007, 0.012), ink);
   col += vec3(0.17, 0.175, 0.19) * filament * smoothstep(0.3, 0.7, q.x) * (1.0 - cobalt * 0.6);
-  col += vec3(0.05, 0.15, 0.6) * filament * cobalt;
+  col += uTint * filament * cobalt;
 
   // Vignette and grain keep the centre readable and avoid banding.
   col *= 1.0 - 0.55 * smoothstep(0.4, 1.4, length(uv));
   col += (hash(gl_FragCoord.xy + fract(uTime) * 100.0) - 0.5) * 0.018;
   outColor = vec4(col, 1.0);
 }`;
+
+type Palette = { tint: [number, number, number]; water: [number, number, number] };
+
+const PALETTES: Record<"cobalt" | "blood", Palette> = {
+  cobalt: { tint: [0.055, 0.165, 0.66], water: [0.04, 0.062, 0.16] },
+  // The deep red of ODISEA's artwork.
+  blood: { tint: [0.6, 0.035, 0.05], water: [0.15, 0.025, 0.03] },
+};
+
+export function paletteFor(pathname: string): keyof typeof PALETTES {
+  return /\/paralelos\/odisea(\/|$)/.test(pathname) ? "blood" : "cobalt";
+}
 
 const VERTEX = `#version 300 es
 in vec2 aPos;
@@ -92,6 +107,15 @@ function compile(gl: WebGL2RenderingContext, type: number, source: string) {
 
 export function InkBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pathname = usePathname();
+  // Read by the render loop, so changing page never restarts WebGL.
+  const target = useRef<Palette>(PALETTES[paletteFor(pathname)]);
+  const redraw = useRef<() => void>(() => {});
+
+  useEffect(() => {
+    target.current = PALETTES[paletteFor(pathname)];
+    redraw.current();
+  }, [pathname]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -121,6 +145,10 @@ export function InkBackground() {
     const uTime = gl.getUniformLocation(program, "uTime");
     const uScroll = gl.getUniformLocation(program, "uScroll");
     const uStir = gl.getUniformLocation(program, "uStir");
+    const uTint = gl.getUniformLocation(program, "uTint");
+    const uWater = gl.getUniformLocation(program, "uWater");
+    const tint = [...target.current.tint];
+    const water = [...target.current.water];
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Ink is soft: half resolution is invisible and four times cheaper.
@@ -142,6 +170,8 @@ export function InkBackground() {
       gl.uniform1f(uTime, time);
       gl.uniform1f(uScroll, scroll);
       gl.uniform1f(uStir, stir);
+      gl.uniform3fv(uTint, tint);
+      gl.uniform3fv(uWater, water);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
 
@@ -161,8 +191,22 @@ export function InkBackground() {
       scroll += step;
       const speed = Math.min(1, Math.abs(step / Math.max(dt, 1e-3)) * 0.6);
       stir += (speed - stir) * (1 - Math.exp(-dt * (speed > stir ? 4 : 1.2)));
+      // The colour bleeds into the new one over about a second.
+      const blend = 1 - Math.exp(-dt * 2.2);
+      for (let i = 0; i < 3; i++) {
+        tint[i] += (target.current.tint[i] - tint[i]) * blend;
+        water[i] += (target.current.water[i] - water[i]) * blend;
+      }
       draw((now - start) / 1000);
       frame = requestAnimationFrame(loop);
+    };
+
+    // With reduced motion there is no loop: jump to the new colour at once.
+    redraw.current = () => {
+      if (!reduceMotion) return;
+      tint.splice(0, 3, ...target.current.tint);
+      water.splice(0, 3, ...target.current.water);
+      draw(0);
     };
 
     const onResize = () => {

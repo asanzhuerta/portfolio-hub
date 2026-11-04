@@ -49,6 +49,22 @@ body {
   outline-offset: 3px;
 }
 
+/* Language switch: the page fades out, changes language and fades back in. */
+main,
+footer,
+header nav[aria-label] ul {
+  transition:
+    opacity 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    filter 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-fade="out"] main,
+[data-fade="out"] footer,
+[data-fade="out"] header nav[aria-label] ul {
+  opacity: 0;
+  filter: blur(8px);
+}
+
 /* Scroll reveal: elements rise in from below as they enter the viewport and drift
    out upwards (or back down) as they leave it, with a short stagger between
    siblings. RevealObserver arms it with data-motion, so without JavaScript or with

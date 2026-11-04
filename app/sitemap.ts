@@ -3,7 +3,7 @@ import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
 import { locales } from "@/lib/i18n";
 
-const paths = ["", "/paralelos", ...projects.map((project) => `/projects/${project.slug}`)];
+const paths = ["", "/paralelos", "/paralelos/odisea", ...projects.map((project) => `/projects/${project.slug}`)];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return paths.flatMap((path) =>

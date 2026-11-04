@@ -7,6 +7,10 @@ export type SideProject = {
   summary: Localized;
   /** Wordmark in public/, white on transparent. Without one the name is set in type. */
   logo?: { src: string; width: number; height: number };
+  /** A page inside this site (path below /<lang>). Without one: "own site on the way". */
+  page?: string;
+  /** Colour of the card's glow, as "r g b". */
+  glow?: string;
 };
 
 /** Each one will get its own site later; for now they are a showcase. */
@@ -29,5 +33,17 @@ export const sideProjects: SideProject[] = [
       en: "Organising and producing music events: line-ups, promotion, bands and suppliers.",
     },
     logo: { src: "/side/orion-rituals.webp", width: 1400, height: 563 },
+  },
+  {
+    slug: "odisea",
+    name: { es: "ODISEA", en: "ODISEA" },
+    kind: { es: "Banda · Metalcore alternativo · 2022–2026", en: "Band · Alternative metalcore · 2022–2026" },
+    summary: {
+      es: "Mi antigua banda: un álbum, un EP, varios singles y una veintena de conciertos por Andalucía.",
+      en: "My former band: an album, an EP, several singles and some twenty shows across Andalusia.",
+    },
+    logo: { src: "/side/odisea.webp", width: 1400, height: 553 },
+    page: "/paralelos/odisea",
+    glow: "229 72 77",
   },
 ];

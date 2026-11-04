@@ -37,7 +37,7 @@ export const viewport: Viewport = {
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
   const t = await getDict();
-  const title = `${profile.name} · ${profile.title}`;
+  const title = `${profile.name} · ${profile.title[lang]}`;
   return {
     metadataBase: new URL(profile.website),
     title: { default: title, template: `%s · ${profile.name}` },
@@ -45,7 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
     applicationName: profile.name,
     authors: [{ name: profile.name, url: profile.website }],
     creator: profile.name,
-    keywords: [profile.name, profile.title, ...profile.focus, "Cover_Maker", "Orion Rituals"],
+    keywords: [profile.name, profile.title[lang], ...profile.focus[lang], "ODISEA", "Cover_Maker", "Orion Rituals"],
     alternates: {
       canonical: href(lang),
       languages: { es: href("es"), en: href("en"), "x-default": href("es") },

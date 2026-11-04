@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Original del CV (contiene datos privados)
 /CURRICULUM_VITAE_*.pdf
+
+# Material de origen de ODISEA (tiene datos de contacto)
+/dossier-OD/

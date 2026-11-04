@@ -48,10 +48,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </h1>
             <div data-reveal style={stagger(1)} className="flex flex-col gap-2">
               <p className="font-display text-2xl font-medium tracking-tight text-foreground/90 sm:text-3xl">
-                {profile.title}
+                {profile.title[lang]}
               </p>
               <ul className="flex flex-wrap gap-x-5 gap-y-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-accent sm:text-xs">
-                {profile.focus.map((item) => (
+                {profile.focus[lang].map((item) => (
                   <li key={item} className="flex items-center gap-2">
                     <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent/70" />
                     {item}
@@ -62,10 +62,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <p
               data-reveal
               style={stagger(2)}
-              className="flex items-center gap-3 text-sm font-semibold tracking-wide text-faint"
+              className="flex items-center gap-3 text-[15px] font-semibold tracking-wide text-muted sm:text-base"
             >
-              <span aria-hidden="true" className="h-px w-8 bg-line-strong" />
-              {profile.beyond.join(" · ")}
+              <span aria-hidden="true" className="h-px w-8 shrink-0 bg-line-strong" />
+              {profile.beyond[lang].join(" · ")}
             </p>
           </div>
           <p data-reveal style={stagger(3)} className="max-w-lg text-lg leading-relaxed text-muted">

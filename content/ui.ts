@@ -4,7 +4,7 @@ const es = {
   meta: {
     description:
       "Alejandro Sanz Huerta, Systems Engineer: desarrollo full-stack, arquitectura de sistemas e IA aplicada. Proyectos, descargas y contacto.",
-    sideDescription: "Mi banda de metal alternativo y Orion Rituals, mi marca de festivales.",
+    sideDescription: "Mi banda de metal alternativo, Orion Rituals, mi marca de festivales, y ODISEA, mi antigua banda.",
   },
   nav: { bio: "Bio", projects: "Proyectos", side: "Paralelos", contact: "Contacto", label: "Principal" },
   language: { label: "Idioma", es: "Español", en: "English" },
@@ -31,11 +31,24 @@ const es = {
     soon: "Próximamente",
     notes: "notas de la versión",
   },
+  lightbox: { open: "Ver a pantalla completa", close: "Cerrar", prev: "Anterior", next: "Siguiente" },
   side: {
     kicker: "Fuera del código",
     title: "Proyectos paralelos",
-    intro: "Música y eventos: lo que hago cuando no estoy programando. Cada uno tendrá pronto su propia web.",
+    intro: "Música y eventos: lo que hago cuando no estoy programando. Los activos tendrán pronto su propia web.",
     soon: "Web propia en camino",
+  },
+  odisea: {
+    photoAlt: "Los cinco miembros de ODISEA",
+    about: "La banda",
+    videos: "Vídeos",
+    live: "En directo",
+    play: "Reproducir",
+    music: "Discografía",
+    spotify: "ODISEA en Spotify",
+    shows: "Trayectoria",
+    press: "Prensa",
+    open: "Ver la banda",
   },
   notFound: { title: "Aquí no hay nada.", back: "← Volver al inicio" },
 };
@@ -46,7 +59,7 @@ const en: Dictionary = {
   meta: {
     description:
       "Alejandro Sanz Huerta, Systems Engineer: full-stack development, systems architecture and applied AI. Projects, downloads and contact.",
-    sideDescription: "My alternative metal band and Orion Rituals, my festival brand.",
+    sideDescription: "My alternative metal band, Orion Rituals, my festival brand, and ODISEA, my former band.",
   },
   nav: { bio: "Bio", projects: "Projects", side: "Side", contact: "Contact", label: "Main" },
   language: { label: "Language", es: "Español", en: "English" },
@@ -73,11 +86,24 @@ const en: Dictionary = {
     soon: "Coming soon",
     notes: "release notes",
   },
+  lightbox: { open: "View full screen", close: "Close", prev: "Previous", next: "Next" },
   side: {
     kicker: "Beyond code",
     title: "Side projects",
-    intro: "Music and events: what I do when I am not programming. Each will soon have a site of its own.",
+    intro: "Music and events: what I do when I am not programming. The active ones will soon have a site of their own.",
     soon: "Own site on the way",
+  },
+  odisea: {
+    photoAlt: "The five members of ODISEA",
+    about: "The band",
+    videos: "Videos",
+    live: "Live",
+    play: "Play",
+    music: "Discography",
+    spotify: "ODISEA on Spotify",
+    shows: "Shows",
+    press: "Press",
+    open: "See the band",
   },
   notFound: { title: "Nothing here.", back: "← Back home" },
 };

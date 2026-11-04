@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { DownloadButton } from "@/components/DownloadButton";
 import { Icon } from "@/components/Icon";
+import { Lightbox } from "@/components/Lightbox";
 import { SectionHeading } from "@/components/SectionHeading";
 import { buttonSecondary, panel } from "@/components/styles";
 import { getProject, projects, type Screenshot } from "@/content/projects";
@@ -48,27 +49,32 @@ function List({ index, title, items }: { index: string; title: string; items: st
   );
 }
 
-function Gallery({ index, title, shots, lang }: { index: string; title: string; shots: Screenshot[]; lang: "es" | "en" }) {
+function Gallery({
+  index,
+  title,
+  shots,
+  lang,
+  labels,
+}: {
+  index: string;
+  title: string;
+  shots: Screenshot[];
+  lang: "es" | "en";
+  labels: { open: string; close: string; prev: string; next: string };
+}) {
   return (
     <section className="flex flex-col gap-8">
       <SectionHeading index={index} title={title} />
-      <div className="grid gap-5 md:grid-cols-2">
-        {shots.map((shot, i) => (
-          <figure key={shot.src[lang]} data-reveal style={stagger(i % 2)} className={`flex flex-col gap-3 ${i === 0 ? "md:col-span-2" : ""}`}>
-            <div className="overflow-hidden rounded-2xl border border-line-strong bg-black/40 shadow-2xl shadow-black/60">
-              <Image
-                src={shot.src[lang]}
-                alt={shot.caption[lang]}
-                width={shot.width}
-                height={shot.height}
-                sizes={i === 0 ? "(min-width: 1152px) 1088px, 100vw" : "(min-width: 768px) 50vw, 100vw"}
-                className="h-auto w-full"
-              />
-            </div>
-            <figcaption className="font-mono text-xs text-faint">{shot.caption[lang]}</figcaption>
-          </figure>
-        ))}
-      </div>
+      <Lightbox
+        labels={labels}
+        images={shots.map((shot) => ({
+          src: shot.src[lang],
+          alt: shot.caption[lang],
+          caption: shot.caption[lang],
+          width: shot.width,
+          height: shot.height,
+        }))}
+      />
     </section>
   );
 }
@@ -126,7 +132,7 @@ export default async function ProjectPage({ params }: PageProps<"/[lang]/project
       </section>
 
       {project.screenshots.length > 0 && (
-        <Gallery index={index("screenshots")} title={t.project.screenshots} shots={project.screenshots} lang={lang} />
+        <Gallery index={index("screenshots")} title={t.project.screenshots} shots={project.screenshots} lang={lang} labels={t.lightbox} />
       )}
       <List index={index("features")} title={t.project.features} items={project.features[lang]} />
       <List index={index("requirements")} title={t.project.requirements} items={project.requirements[lang]} />

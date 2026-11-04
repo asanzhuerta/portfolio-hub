@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Icon } from "@/components/Icon";
 import { panel } from "@/components/styles";
-import { sideProjects } from "@/content/sideProjects";
-import { href, isLocale } from "@/lib/i18n";
+import { sideProjects, type SideProject } from "@/content/sideProjects";
+import { href, isLocale, type Locale } from "@/lib/i18n";
 import { getDict, getLang } from "@/lib/locale";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -21,6 +23,68 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const stagger = (i: number) => ({ "--i": i }) as React.CSSProperties;
+
+function Card({ project, index, lang, soon, open }: { project: SideProject; index: number; lang: Locale; soon: string; open: string }) {
+  const glow = project.glow ?? "47 82 230";
+  const body = (
+    <>
+      {/* A coloured glow behind the mark, like stage light through smoke. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 opacity-80 transition-opacity duration-700 group-hover:opacity-100"
+        style={{ background: `radial-gradient(ellipse 60% 45% at 50% 48%, rgb(${glow} / 0.24), transparent 72%)` }}
+      />
+      <div className="flex items-start justify-between gap-3">
+        <span className="rounded-full border border-line px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted">
+          {project.kind[lang]}
+        </span>
+        <span className="font-mono text-xs text-faint">{String(index + 1).padStart(2, "0")}</span>
+      </div>
+
+      <div className="flex flex-1 items-center justify-center py-6">
+        {project.logo ? (
+          <Image
+            src={project.logo.src}
+            alt={project.name[lang]}
+            width={project.logo.width}
+            height={project.logo.height}
+            sizes="(min-width: 1024px) 320px, (min-width: 640px) 45vw, 85vw"
+            loading="eager"
+            className="h-auto w-full max-w-[320px] opacity-90 transition duration-700 group-hover:scale-[1.03] group-hover:opacity-100"
+            style={{ filter: `drop-shadow(0 0 22px rgb(${glow} / 0.4))` }}
+          />
+        ) : (
+          <span
+            className="text-center font-display text-4xl font-extrabold uppercase leading-none tracking-[0.1em] text-foreground/90"
+            style={{ filter: `drop-shadow(0 0 22px rgb(${glow} / 0.4))` }}
+          >
+            {project.name[lang]}
+          </span>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <h2 className="font-display text-xl font-semibold tracking-tight">{project.name[lang]}</h2>
+        <p className="text-sm leading-relaxed text-muted">{project.summary[lang]}</p>
+        {project.page ? (
+          <span className="mt-2 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest" style={{ color: `rgb(${glow})` }}>
+            {open} <Icon name="arrow" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </span>
+        ) : (
+          <span className="mt-2 font-mono text-[11px] uppercase tracking-widest text-accent">{soon}</span>
+        )}
+      </div>
+    </>
+  );
+  const className = `${panel} group relative isolate flex h-full min-h-[24rem] flex-col justify-between overflow-hidden p-6`;
+  return project.page ? (
+    <Link href={href(lang, project.page)} className={`${className} transition-colors hover:border-line-strong`}>
+      {body}
+    </Link>
+  ) : (
+    <article className={className}>{body}</article>
+  );
+}
 
 export default async function SideProjectsPage({ params }: PageProps<"/[lang]/paralelos">) {
   if (!isLocale((await params).lang)) notFound();
@@ -41,50 +105,10 @@ export default async function SideProjectsPage({ params }: PageProps<"/[lang]/pa
         </p>
       </header>
 
-      <ul className="flex flex-col gap-6">
+      <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {sideProjects.map((project, i) => (
-          <li key={project.slug} id={project.slug} className="scroll-mt-24">
-            <article
-              data-reveal
-              className={`${panel} group relative isolate flex min-h-[28rem] flex-col justify-between gap-10 overflow-hidden p-6 sm:min-h-[34rem] sm:p-10`}
-            >
-              {/* A cold glow behind the mark, like stage light through smoke. */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_55%_45%_at_50%_52%,rgb(47_82_230/0.22),transparent_70%)]"
-              />
-              <div className="flex items-start justify-between gap-4">
-                <span className="rounded-full border border-line px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-muted">
-                  {project.kind[lang]}
-                </span>
-                <span className="font-mono text-xs text-faint">{String(i + 1).padStart(2, "0")}</span>
-              </div>
-
-              <div className="flex flex-1 items-center justify-center py-4">
-                {project.logo ? (
-                  <Image
-                    src={project.logo.src}
-                    alt={project.name[lang]}
-                    width={project.logo.width}
-                    height={project.logo.height}
-                    sizes="(min-width: 1152px) 720px, 85vw"
-                    className="h-auto w-full max-w-[720px] opacity-90 drop-shadow-[0_0_28px_rgb(91_124_255/0.35)] transition duration-700 group-hover:scale-[1.02] group-hover:opacity-100"
-                  />
-                ) : (
-                  <h2 className="text-center font-display text-5xl font-extrabold uppercase leading-none tracking-[0.12em] text-foreground/90 drop-shadow-[0_0_28px_rgb(91_124_255/0.35)] sm:text-7xl lg:text-8xl">
-                    {project.name[lang]}
-                  </h2>
-                )}
-              </div>
-
-              <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-                <div className="flex flex-col gap-2">
-                  {project.logo && <h2 className="font-display text-2xl font-semibold tracking-tight">{project.name[lang]}</h2>}
-                  <p className="max-w-md text-muted">{project.summary[lang]}</p>
-                </div>
-                <span className="font-mono text-[11px] uppercase tracking-widest text-accent">{t.side.soon}</span>
-              </div>
-            </article>
+          <li key={project.slug} id={project.slug} data-reveal style={stagger(i)} className="scroll-mt-24">
+            <Card project={project} index={i} lang={lang} soon={t.side.soon} open={t.odisea.open} />
           </li>
         ))}
       </ul>
