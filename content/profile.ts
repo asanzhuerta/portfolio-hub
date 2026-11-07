@@ -18,8 +18,8 @@ export type Profile = {
   intro: Localized;
   /** Paragraphs of the biography. `**text**` is shown in bold. */
   bio: Localized<string[]>;
-  /** Portrait in public/. Its edges fade into the background. */
-  photo: string;
+  /** Cut-out portrait in public/ with its fades baked in (scripts/fade-cutout.mjs). */
+  photo: { src: string; width: number; height: number };
   email: string;
   website: string;
   /** CV PDF in public/, one per language (built from cv/ with LaTeX). Empty while missing. */
@@ -69,7 +69,7 @@ export const profile: Profile = {
       "This space gathers part of that journey: projects, experiments and initiatives that reflect how I understand technology, take on challenges and turn ideas into reality.",
     ],
   },
-  photo: "/portrait.svg",
+  photo: { src: "/retrato.webp", width: 1000, height: 1034 },
   email: "alejandro.sanzhuerta.dev@gmail.com",
   website: "https://asanzhuerta.netlify.app",
   cv: {

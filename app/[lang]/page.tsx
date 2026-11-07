@@ -60,8 +60,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <div className="flex flex-col gap-28 pb-28 sm:gap-36">
-      <section className="relative grid min-h-[calc(100svh-4rem)] items-center gap-10 py-16 md:grid-cols-[1.3fr_0.7fr]">
-        <div className="relative z-10 flex min-w-0 flex-col gap-8">
+      <section className="relative grid items-center gap-8 py-10 sm:py-16 md:min-h-[calc(100svh-4rem)] md:grid-cols-[1.2fr_0.8fr] md:gap-10">
+        <div className="relative z-10 -mt-24 flex min-w-0 flex-col gap-8 sm:-mt-32 md:mt-0">
           <div className="flex flex-col gap-6">
             {/* "Sanz Huerta" is set at 81% so it spans exactly the width of "Alejandro". */}
             <h1
@@ -108,20 +108,22 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <CvButton />
           </div>
         </div>
-        {/* The portrait dissolves into the ink: masked towards its edges. */}
+        {/* The portrait, cut out like the side project photos: above the name on
+            phones, beside it from tablets up. Its soft edges are in the image itself,
+            so the glow follows the silhouette and nothing clips it. */}
         <div
           data-reveal
           style={stagger(2)}
-          className="pointer-events-none absolute inset-y-0 right-0 w-full opacity-40 md:relative md:w-auto md:opacity-100"
+          className="pointer-events-none order-first flex justify-center md:order-none md:-mr-8 md:justify-end xl:-mr-20"
         >
           <Image
-            src={profile.photo}
+            src={profile.photo.src}
             alt={`${t.home.portraitAlt} ${profile.name}`}
-            width={600}
-            height={750}
+            width={profile.photo.width}
+            height={profile.photo.height}
             priority
-            unoptimized={profile.photo.endsWith(".svg")}
-            className="ml-auto h-full max-h-[78svh] w-auto object-cover [mask-image:radial-gradient(ellipse_58%_58%_at_55%_45%,black_30%,transparent_72%)]"
+            unoptimized
+            className="h-auto max-h-[52svh] w-auto max-w-full drop-shadow-[0_0_40px_rgb(91_124_255/0.3)] md:max-h-[82svh]"
           />
         </div>
       </section>
