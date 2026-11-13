@@ -16,12 +16,17 @@ export default async function Image({ params }: { params: Promise<{ lang: string
   const { lang: segment, slug } = await params;
   const lang = isLocale(segment) ? segment : "es";
   const project = getProject(slug) ?? projects[0];
-  const svg = await readFile(join(process.cwd(), "public", project.icon));
+  // A project with its own social preview (Cover_Maker's, in its Tape & Console look) uses it as is.
+  if (project.ogImage) {
+    const png = await readFile(join(process.cwd(), "public", project.ogImage));
+    return new Response(png, { headers: { "Content-Type": "image/png" } });
+  }
+  const icon = await readFile(join(process.cwd(), "public", project.icon));
   return ogImage({
     kicker: lang === "en" ? "Project · Free download" : "Proyecto · Descarga gratuita",
     title: project.name,
     subtitle: project.tagline[lang],
     footer: `${project.platforms[lang].join(" · ")} · ${project.licence}`,
-    icon: `data:image/svg+xml;base64,${svg.toString("base64")}`,
+    icon: `data:image/svg+xml;base64,${icon.toString("base64")}`,
   });
 }

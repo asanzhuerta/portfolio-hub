@@ -39,6 +39,42 @@ body {
   color: var(--foreground);
 }
 
+/* Cover_Maker's "Tape & Console" look, scoped to its card and project page: warm
+   near-black, cream text, signal-orange accent, Archivo SemiExpanded and IBM Plex
+   (the font variables come from lib/tapeFonts.ts). The rest of the site keeps
+   Signal Blue. */
+.theme-tape {
+  --background: #0c0b0a;
+  --surface: rgb(21 19 15 / 0.82);
+  --surface-raised: #1d1a16;
+  --foreground: #f1e9dc;
+  --muted: #b9ae9d;
+  --faint: #8a7f70;
+  --line: rgb(241 233 220 / 0.1);
+  --line-strong: rgb(241 233 220 / 0.2);
+  --accent: #ff6a3d;
+  --accent-strong: #e5512a;
+  --font-jakarta: var(--font-tape-display);
+  --font-geist-sans: var(--font-tape-sans);
+  --font-geist-mono: var(--font-tape-mono);
+  color: var(--foreground);
+  font-family: var(--font-tape-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.theme-tape .font-display {
+  font-stretch: 112.5%;
+}
+
+.theme-tape ::selection {
+  background: var(--accent);
+  color: #0c0b0a;
+}
+
+/* Before the ink loads, the Cover_Maker page starts warm instead of cobalt. */
+html:has(article.theme-tape) {
+  background: radial-gradient(ellipse at 70% 20%, #2a1409 0%, transparent 55%) fixed, #0c0b0a;
+}
+
 ::selection {
   background: var(--accent-strong);
   color: #fff;

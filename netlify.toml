@@ -16,4 +16,4 @@
 
 # Read from disk by the Open Graph image routes (lib/og.tsx).
 [functions]
-  included_files = ["assets/fonts/*.ttf", "public/*.svg"]
+  included_files = ["assets/fonts/*.ttf", "public/*.svg", "public/projects/*/*.svg", "public/projects/*/og.png"]

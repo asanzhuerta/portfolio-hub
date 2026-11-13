@@ -1,29 +1,74 @@
 [
   {
-    "name": "nuevo-trabajo",
-    "width": 1920,
-    "height": 1200,
+    "name": "mixer",
+    "width": 1280,
+    "height": 800,
     "src": {
-      "es": "/projects/cover-maker/nuevo-trabajo-es.webp",
-      "en": "/projects/cover-maker/nuevo-trabajo-en.webp"
+      "es": "/projects/cover-maker/mixer-es.webp",
+      "en": "/projects/cover-maker/mixer-en.webp"
     }
   },
   {
-    "name": "mezclador",
-    "width": 1920,
-    "height": 1200,
+    "name": "practice",
+    "width": 1280,
+    "height": 820,
     "src": {
-      "es": "/projects/cover-maker/mezclador-es.webp",
-      "en": "/projects/cover-maker/mezclador-en.webp"
+      "es": "/projects/cover-maker/practice.webp",
+      "en": "/projects/cover-maker/practice.webp"
     }
   },
   {
-    "name": "modelos",
-    "width": 1920,
-    "height": 1200,
+    "name": "loop",
+    "width": 1280,
+    "height": 820,
     "src": {
-      "es": "/projects/cover-maker/modelos-es.webp",
-      "en": "/projects/cover-maker/modelos-en.webp"
+      "es": "/projects/cover-maker/loop.webp",
+      "en": "/projects/cover-maker/loop.webp"
+    }
+  },
+  {
+    "name": "meters",
+    "width": 1280,
+    "height": 820,
+    "src": {
+      "es": "/projects/cover-maker/meters.webp",
+      "en": "/projects/cover-maker/meters.webp"
+    }
+  },
+  {
+    "name": "new-job",
+    "width": 1280,
+    "height": 800,
+    "src": {
+      "es": "/projects/cover-maker/new-job-es.webp",
+      "en": "/projects/cover-maker/new-job-en.webp"
+    }
+  },
+  {
+    "name": "queue",
+    "width": 1280,
+    "height": 800,
+    "src": {
+      "es": "/projects/cover-maker/queue-es.webp",
+      "en": "/projects/cover-maker/queue-en.webp"
+    }
+  },
+  {
+    "name": "quick-start",
+    "width": 1280,
+    "height": 800,
+    "src": {
+      "es": "/projects/cover-maker/quick-start-es.webp",
+      "en": "/projects/cover-maker/quick-start-en.webp"
+    }
+  },
+  {
+    "name": "lcd",
+    "width": 460,
+    "height": 80,
+    "src": {
+      "es": "/projects/cover-maker/lcd.webp",
+      "en": "/projects/cover-maker/lcd.webp"
     }
   }
 ]
