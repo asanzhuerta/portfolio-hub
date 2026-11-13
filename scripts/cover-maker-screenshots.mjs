@@ -42,7 +42,7 @@ const shots = [
 
 mkdirSync(outDir, { recursive: true });
 
-for (const file of ["logo.svg", "logo-mark.svg"]) {
+for (const file of ["logo.svg"]) {
   copyFileSync(join(source, "branding", file), join(outDir, file));
   console.log(`  ${file}`);
 }

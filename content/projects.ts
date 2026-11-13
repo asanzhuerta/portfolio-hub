@@ -111,8 +111,6 @@ export type Project = {
   tags: Localized<string[]>;
   /** Square icon in public/, shown on the card and the project page. */
   icon: string;
-  /** Large mark shown faintly behind the project page header. */
-  mark?: string;
   /** Open Graph image in public/ (1200×630 PNG); otherwise one is drawn in the site's look. */
   ogImage?: string;
   screenshots: Screenshot[];
@@ -130,7 +128,6 @@ export const projects: Project[] = [
   {
     slug: "cover-maker",
     icon: "/projects/cover-maker/logo.svg",
-    mark: "/projects/cover-maker/logo-mark.svg",
     ogImage: "/projects/cover-maker/og.png",
     theme: "theme-tape",
     name: "Cover_Maker",
