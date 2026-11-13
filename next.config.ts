@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  // Screenshots are stored as WebP; browsers that support AVIF get it instead.
+  images: { formats: ["image/avif", "image/webp"] },
   // Every page lives under /es or /en. Old links (shared before the English
   // version existed) land on the Spanish page.
   async redirects() {

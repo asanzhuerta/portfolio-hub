@@ -34,6 +34,8 @@ const es = {
     download: "Descargar para Windows",
     soon: "Próximamente",
     notes: "notas de la versión",
+    release: "Versión en GitHub",
+    version: "Versión",
   },
   lightbox: { open: "Ver a pantalla completa", close: "Cerrar", prev: "Anterior", next: "Siguiente" },
   side: {
@@ -119,6 +121,8 @@ const en: Dictionary = {
     download: "Download for Windows",
     soon: "Coming soon",
     notes: "release notes",
+    release: "GitHub release",
+    version: "Version",
   },
   lightbox: { open: "View full screen", close: "Close", prev: "Previous", next: "Next" },
   side: {

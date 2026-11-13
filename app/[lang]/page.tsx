@@ -11,6 +11,7 @@ import { profile, type Entry } from "@/content/profile";
 import { projects } from "@/content/projects";
 import { href, isLocale } from "@/lib/i18n";
 import { getDict, getLang } from "@/lib/locale";
+import { tapeFonts } from "@/lib/tapeFonts";
 
 const stagger = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
@@ -147,9 +148,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <ul className="grid gap-5 sm:grid-cols-2">
           {projects.map((project, i) => (
             <li key={project.slug} data-reveal style={stagger(i)}>
+              {/* A project can carry its own look (Cover_Maker: "Tape & Console", see globals.css). */}
               <Link
                 href={href(lang, `/projects/${project.slug}`)}
-                className={`${panel} group flex h-full flex-col gap-6 p-6 transition-colors hover:border-accent/60`}
+                className={`${panel} group flex h-full flex-col gap-6 p-6 transition-colors hover:border-accent/60 ${project.theme === "theme-tape" ? `theme-tape ${tapeFonts}` : ""}`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <Image
@@ -158,16 +160,24 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                     width={64}
                     height={64}
                     unoptimized
-                    className="h-16 w-16 rounded-2xl shadow-lg shadow-black/40"
+                    className="h-16 w-16 rounded-full shadow-lg shadow-black/40"
                   />
-                  <Icon
-                    name="arrow"
-                    className="h-5 w-5 -rotate-45 text-faint transition-all group-hover:rotate-0 group-hover:text-accent"
-                  />
+                  <div className="flex items-center gap-3">
+                    {project.version && (
+                      <span className="rounded border border-accent/50 bg-accent/10 px-2 py-0.5 font-mono text-xs text-accent">
+                        <span className="sr-only">{t.project.version} </span>v{project.version}
+                      </span>
+                    )}
+                    <Icon
+                      name="arrow"
+                      className="h-5 w-5 -rotate-45 text-faint transition-all group-hover:rotate-0 group-hover:text-accent"
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-col gap-2">
                   <h3 className="font-display text-2xl font-semibold tracking-tight">{project.name}</h3>
-                  <p className="text-muted">{project.tagline[lang]}</p>
+                  <p className="font-medium">{project.tagline[lang]}</p>
+                  <p className="text-muted">{project.summary[lang]}</p>
                 </div>
                 <ul className="mt-auto flex flex-wrap gap-2">
                   {project.tags[lang].map((tag) => (

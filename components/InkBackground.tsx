@@ -87,8 +87,8 @@ const PALETTES: Record<"cobalt" | "blood" | "ritual" | "studio", Palette> = {
   blood: { tint: [0.6, 0.035, 0.05], water: [0.15, 0.025, 0.03] },
   // The purple of Orion Rituals' Halloween poster.
   ritual: { tint: [0.42, 0.26, 0.82], water: [0.13, 0.09, 0.25] },
-  // Cover_Maker's logo: violet filaments in a magenta haze.
-  studio: { tint: [0.4, 0.33, 0.86], water: [0.19, 0.05, 0.13] },
+  // Cover_Maker's "Tape & Console": signal-orange filaments in a warm, smoky haze.
+  studio: { tint: [0.72, 0.24, 0.1], water: [0.13, 0.08, 0.045] },
 };
 
 export function paletteFor(pathname: string): keyof typeof PALETTES {

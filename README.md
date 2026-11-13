@@ -11,7 +11,7 @@ npm run dev          # http://localhost:3000
 npm run build        # build de producción
 npm run lint
 npm run cv           # compila el CV (XeLaTeX)
-npm run screenshots  # capturas nuevas de Cover_Maker
+npm run screenshots  # logo y capturas de Cover_Maker desde su repo
 ```
 
 ## Idiomas
@@ -49,12 +49,19 @@ renderizado en CPU: `node scripts/ink-still.mjs cv/tinta.png 2480 1040`.
 
 ## Capturas de Cover_Maker
 
-`npm run screenshots` abre la app real (la instalada o el build local en
-`../cover_maker`), la maneja por DevTools y guarda cada pantalla en español y en
-inglés en `public/projects/cover-maker/`, junto con el índice
-`content/screenshots/cover-maker.json`. Repítelo después de cada versión con
-cambios visibles. Para la captura del mezclador hace falta un trabajo terminado;
-su título se cambia por uno neutro para no mostrar canciones de terceros.
+`npm run screenshots` copia de la copia local de Cover_Maker (`../cover_maker`,
+en `main`) el logo (`branding/`), la imagen social y las capturas de
+`docs/screenshots/readme/{en,es}`, `docs/screenshots/m14` y
+`docs/latex/user-manual/figures`. Las convierte a WebP en
+`public/projects/cover-maker/` y escribe el índice
+`content/screenshots/cover-maker.json`; los textos alternativos y los pies de foto
+están en `content/projects.ts`. `next/image` las sirve en AVIF o WebP al ancho que
+hace falta. Repítelo después de cada versión con cambios visibles. Solo se usan
+capturas con audio Creative Commons o sintético, nunca música comercial.
+
+La tarjeta y la página de Cover_Maker usan su propia identidad, "Tape & Console"
+(clase `.theme-tape` en `app/globals.css` y fuentes en `lib/tapeFonts.ts`); el
+resto de la web mantiene "Signal Blue".
 
 ## Descargas
 
